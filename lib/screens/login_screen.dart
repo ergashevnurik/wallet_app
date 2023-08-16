@@ -1,19 +1,19 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:wallet_app/screens/home_screen.dart';
 
-class User {
-  final int id;
-  final String name;
+class Subscriber {
+  final String contact;
 
-  User({required this.id, required this.name});
+  Subscriber({required this.contact});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'],
-      name: json['name'],
+  factory Subscriber.fromJson(Map<String, dynamic> json) {
+    return Subscriber(
+      contact: json['contact'],
     );
   }
 }
@@ -25,54 +25,47 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
-  List<User> users = [];
+  List<Subscriber> subscribers = [];
+  bool _isLoggedIn = false; // Track login status
 
   Future<void> _login() async {
-    final response = await http.get(
-      Uri.parse('YOUR_BACKEND_API_URL/api/users'),
-    );
-    if (response.statusCode == 200) {
-      List<dynamic> jsonResponse = json.decode(response.body);
-      setState(() {
-        users = jsonResponse.map((user) => User.fromJson(user)).toList();
-      });
-    } else {
-      throw Exception('Failed to load users');
-    }
+    final phoneNumber = _phoneNumberController.text;
 
-    // Simulate a basic login check (replace with actual authentication logic)
-    final enteredPhoneNumber = _phoneNumberController.text;
-    final matchedUser = users.firstWhere(
-          (user) => user.name == enteredPhoneNumber,
-    );
+    if (phoneNumber.isNotEmpty) {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:82/api/subscribers/v1/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(
+            {'contact': phoneNumber}
+        ),
+      );
 
-    if (matchedUser != null) {
-      // User found, navigate to another screen or perform further actions
-      Navigator.push(
+      if (response.statusCode == 200) {
+        print('Login successful for phone number: $phoneNumber');
+        EasyLoading.showSuccess('Use in initState');
+        setState(() {
+          _isLoggedIn = true; // Update login status
+        });
+        // Navigate to another screen
+        Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen()
-          )
-      );
-      print('Logged in as ${matchedUser.name}');
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+        // Navigate to another screen or perform further actions
+      } else {
+        EasyLoading.showError('Failed with Error');
+        print('Login failed for phone number: $phoneNumber');
+      }
     } else {
-      // User not found, show an error message
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen()
-          )
-      );
-      print('Login failed');
+      print('Please enter a phone number');
+      EasyLoading.showInfo('Please enter a phone number');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -131,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(Colors.black)
                             ),
-                            onPressed: _login,
+                            onPressed: _isLoggedIn ? null : _login, // Disable button if already logged in
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                               child: Text('Авторизоваться'),
@@ -146,8 +139,50 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
           ),
         ),
-        ),
+    );
+  }
+}
 
+class CustomError extends StatelessWidget {
+  final FlutterErrorDetails errorDetails;
+
+  const CustomError({
+    Key? key,
+    required this.errorDetails,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+                'assets/images/error_illustration.png'),
+            Text(
+              kDebugMode
+                  ? errorDetails.summary.toString()
+                  : 'Oups! Something went wrong!',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: kDebugMode ? Colors.red : Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 21),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              kDebugMode
+                  ? 'https://docs.flutter.dev/testing/errors'
+                  : "We encountered an error and we've notified our engineering team about it. Sorry for the inconvenience caused.",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black, fontSize: 14),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

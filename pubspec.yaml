@@ -50,6 +50,7 @@ dependencies:
   page_transition:
   country_picker:
   language_picker:
+  flutter_easyloading:
 
 dev_dependencies:
   flutter_test:
