@@ -17,12 +17,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegisterScreen(),
-        '/home': (context) => HomeScreen()
-      },
+      // initialRoute: '/login',
+      // routes: {
+      //   '/login': (context) => LoginScreen(),
+      //   '/register': (context) => RegisterScreen(),
+      //   '/home': (context) => HomeScreen()
+      // },
       debugShowCheckedModeBanner: false,
       home: HomeWidget(),
     );

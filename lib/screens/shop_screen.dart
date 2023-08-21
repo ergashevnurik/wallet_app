@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_app/components/shop_screen/my_category_card.dart';
+import 'package:wallet_app/screens/category_screen.dart';
 
+import '../components/settings_screen/my_config_card.dart';
 import '../parts/bottom_bar.dart';
 
 class ShopScreen extends StatefulWidget {
@@ -42,6 +44,12 @@ class _ShopScreenState extends State<ShopScreen> {
                   MyCategoryCard(
                     cardText: 'НОВАЯ КОЛЛЕКЦИЯ',
                     imagePath: "https://rasulov.uz/thumb/2/MD6AIIvSvLorsm9Yc_ah_Q/r/d/1_40.png",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context)=> categoryScreen())
+                      );
+                    },
                   ),
                   SizedBox(height: 10),
                   MyCategoryCard(

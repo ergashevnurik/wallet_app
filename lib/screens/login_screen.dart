@@ -6,17 +6,9 @@ import 'dart:convert';
 
 import 'package:wallet_app/screens/home_screen.dart';
 
-class Subscriber {
-  final String contact;
+import '../models/subscriber.dart';
 
-  Subscriber({required this.contact});
 
-  factory Subscriber.fromJson(Map<String, dynamic> json) {
-    return Subscriber(
-      contact: json['contact'],
-    );
-  }
-}
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -27,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
   List<Subscriber> subscribers = [];
   bool _isLoggedIn = false; // Track login status
+  Subscriber? _subscriber;
 
   Future<void> _login() async {
     final phoneNumber = _phoneNumberController.text;
@@ -41,16 +34,37 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        print('Login successful for phone number: $phoneNumber');
-        EasyLoading.showSuccess('Use in initState');
-        setState(() {
-          _isLoggedIn = true; // Update login status
-        });
-        // Navigate to another screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+        final responseData = jsonDecode(response.body);
+        if (responseData.containsKey('contact')) {
+          setState(() {
+            /*_subscriber = Subscriber.fromJson(responseData['contact']);*/
+
+            print('Login successful for phone number: $phoneNumber');
+            _subscriber = Subscriber(
+                first: responseData['first'],
+                last: responseData['last'],
+                birthday: responseData['birthday'],
+                gender: responseData['gender'],
+                percentage: responseData['percentage'],
+                uploaded: responseData['uploaded'],
+                username: responseData['username'],
+                admin: responseData['admin'],
+                verified: responseData['verified'],
+                contact: responseData['contact']
+            );
+            EasyLoading.showSuccess("Welcome, ${_subscriber!.first}");
+            setState(() {
+              _isLoggedIn = true; // Update login status
+            });
+            // Navigate to another screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          });
+        } else {
+          print('Login failed: ${responseData['message']}');
+        }
         // Navigate to another screen or perform further actions
       } else {
         EasyLoading.showError('Failed with Error');

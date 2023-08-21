@@ -4,6 +4,7 @@ import 'package:wallet_app/screens/settings_screen.dart';
 import 'package:wallet_app/screens/shop_screen.dart';
 
 import '../screens/cashbacks_screen.dart';
+import '../screens/products_screen.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key}) : super(key: key);
