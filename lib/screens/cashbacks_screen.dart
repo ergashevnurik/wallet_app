@@ -18,6 +18,28 @@ class _CashBackScreenState extends State<CashBackScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         // bottomNavigationBar: BottomBar(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            "CASH BACKS PROFILE",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          centerTitle: true,
+        ),
         body: SafeArea(
             child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -26,14 +48,14 @@ class _CashBackScreenState extends State<CashBackScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "CASH BACKS PROFILE",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
+                      // Text(
+                      //   "CASH BACKS PROFILE",
+                      //   style: TextStyle(
+                      //       color: Colors.black,
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.bold
+                      //   ),
+                      // ),
 
                       Container(
                         height: height,
