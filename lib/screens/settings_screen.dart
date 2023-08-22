@@ -20,7 +20,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
         body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,

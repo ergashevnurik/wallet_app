@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallet_app/components/home_screen/my_cards.dart';
@@ -8,36 +10,76 @@ import 'package:wallet_app/screens/cashbacks_screen.dart';
 import 'package:wallet_app/screens/register_screen.dart';
 import 'package:wallet_app/screens/settings_screen.dart';
 import 'package:wallet_app/screens/shop_screen.dart';
+import 'package:http/http.dart' as http;
 
+import '../models/subscriber.dart';
 import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String contact;
+  const HomeScreen({Key? key, required this.contact}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // initialRoute: '/login',
-      // routes: {
-      //   '/login': (context) => LoginScreen(),
-      //   '/register': (context) => RegisterScreen(),
-      //   '/home': (context) => HomeScreen()
-      // },
       debugShowCheckedModeBanner: false,
-      home: HomeWidget(),
+      home: HomeWidget(
+        contact: contact,
+      ),
     );
   }
 }
 
 
 class HomeWidget extends StatefulWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  final String contact;
+  const HomeWidget({Key? key, required this.contact}) : super(key: key);
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  bool _isLoading = true;
+  Subscriber? _subscriber;
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserDetails();
+  }
+
+  Future<void> _fetchUserDetails() async {
+    // Make an HTTP GET request to your Spring Boot API to fetch user details
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/details/${widget.contact}'),
+    );
+
+    final responseData = jsonDecode(response.body);
+    _subscriber = Subscriber(
+        id: responseData['id'],
+        first: responseData['first'],
+        last: responseData['last'],
+        birthday: responseData['birthday'],
+        gender: responseData['gender'],
+        percentage: responseData['percentage'],
+        uploaded: responseData['uploaded'],
+        username: responseData['username'],
+        admin: responseData['admin'],
+        verified: responseData['verified'],
+        contact: responseData['contact']
+    );
+
+    print(response);
+
+    if (response.statusCode == 200) {
+      setState(() {
+
+        _isLoading = false;
+      });
+    } else {
+      print('Failed to fetch user details');
+    }
+  }
 
   //page controller
   final _controller = PageController();
@@ -45,7 +87,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -60,13 +102,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                     Row(
                       children: [
                         Text(
-                          'Rasulov',
+                          '${_subscriber!.first}',
                           style: TextStyle(
                               fontSize: 26
                           ),
                         ),
                         Text(
-                          ' GI',
+                          ' ${_subscriber!.last}',
                           style: TextStyle(
                               fontSize: 26
                           ),

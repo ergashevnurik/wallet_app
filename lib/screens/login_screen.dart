@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             print('Login successful for phone number: $phoneNumber');
             _subscriber = Subscriber(
+                id: responseData['id'],
                 first: responseData['first'],
                 last: responseData['last'],
                 birthday: responseData['birthday'],
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Navigate to another screen
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => HomeScreen(contact: _subscriber!.contact)),
             );
           });
         } else {

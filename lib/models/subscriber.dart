@@ -1,4 +1,5 @@
 class Subscriber {
+  final String id;
   final String contact;
   final String first;
   final String last;
@@ -10,10 +11,11 @@ class Subscriber {
   final bool admin;
   final bool verified;
 
-  Subscriber({required this.first,required  this.last,required  this.birthday,required  this.gender,required  this.percentage,required  this.uploaded,required  this.username,required  this.admin,required  this.verified, required this.contact});
+  Subscriber({required this.first,required  this.last,required  this.birthday,required  this.gender,required  this.percentage,required  this.uploaded,required  this.username,required  this.admin,required  this.verified, required this.contact, required this.id});
 
   factory Subscriber.fromJson(Map<String, dynamic> json) {
     return Subscriber(
+      id: json['id'],
       contact: json['contact'],
       first: json['first'],
       last: json['last'],

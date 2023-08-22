@@ -26,7 +26,7 @@ class _LanguageConfigurationState extends State<LanguageConfiguration> {
             },
           ),
         ),
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

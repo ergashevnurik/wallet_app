@@ -22,7 +22,7 @@ class _ShopScreenState extends State<ShopScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
         body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,

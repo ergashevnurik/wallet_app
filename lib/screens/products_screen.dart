@@ -53,7 +53,7 @@ class _productsscreenState extends State<productsscreen> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
         body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,

@@ -27,7 +27,7 @@ class _CreditCardConfigurationState extends State<CreditCardConfiguration> {
           ),
         ),
         backgroundColor: Colors.grey[300],
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
         body: Center(
           child: Padding(
             padding: EdgeInsets.all(16.0),

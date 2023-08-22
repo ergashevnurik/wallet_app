@@ -16,7 +16,7 @@ class _categoryScreenState extends State<categoryScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[300],
-        bottomNavigationBar: BottomBar(),
+        // bottomNavigationBar: BottomBar(),
         appBar: AppBar(),
         body: SafeArea(
           child: SingleChildScrollView (
