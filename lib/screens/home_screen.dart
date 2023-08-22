@@ -101,6 +101,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
       body: SafeArea(
@@ -261,7 +262,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                   ],
                 ),
-              )
+              ),
+
+              // Online shop
+
 
             ],
           ),

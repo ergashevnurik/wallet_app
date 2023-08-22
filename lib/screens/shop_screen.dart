@@ -19,6 +19,7 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -48,13 +49,11 @@ class _ShopScreenState extends State<ShopScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // cards
-                  /*Text(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // cards
+                /*Text(
                     "BUY OUR PRODUCTS",
                     style: TextStyle(
                       color: Colors.black,
@@ -62,54 +61,178 @@ class _ShopScreenState extends State<ShopScreen> {
                       fontWeight: FontWeight.bold
                     ),
                   ),*/
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'НОВАЯ КОЛЛЕКЦИЯ',
-                    imagePath: "https://rasulov.uz/thumb/2/MD6AIIvSvLorsm9Yc_ah_Q/r/d/1_40.png",
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context)=> categoryScreen())
-                      );
-                    },
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'НОВАЯ КОЛЛЕКЦИЯ',
+                //   imagePath: "https://rasulov.uz/thumb/2/MD6AIIvSvLorsm9Yc_ah_Q/r/d/1_40.png",
+                //   onPressed: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context)=> categoryScreen())
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'ЭЛИТ КЛАСС',
+                //   imagePath: "https://rasulov.uz/thumb/2/i2gtGXdBwPWd7fmvauvlrQ/r/d/4.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'ЭКСКЛЮЗИВ КЛАСС',
+                //   imagePath: "https://rasulov.uz/thumb/2/7uFmRdmes4mge7jcCKMIdw/r/d/3.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'ЭКОШПОН',
+                //   imagePath: "https://rasulov.uz/thumb/2/fas2rNy7IXhJ-erW0qQGOg/r/d/2.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'ПРЕМИУМ КЛАСС',
+                //   imagePath: "https://rasulov.uz/thumb/2/XGv6CBwc51yrAeK_6AP60w/r/d/5.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'ПРЕСТИЖ КЛАСС',
+                //   imagePath: "https://rasulov.uz/thumb/2/tcezXP5RHzfkbYfmSstwUw/r/d/6_4.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'МЕЖКОМНАТНЫЕ ОКНА',
+                //   imagePath: "https://rasulov.uz/thumb/2/B4ZaiiZIrAU8LBcplh4c1g/r/d/0909.png",
+                // ),
+                // SizedBox(height: 10),
+                // MyCategoryCard(
+                //   cardText: 'МЕБЕЛЬНЫЕ СТВОРКИ',
+                //   imagePath: "https://rasulov.uz/thumb/2/znrksxHED1W3ApFKngsQ7A/r/d/8989.png",
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(27.0),
+                  child: Wrap(
+                    spacing: 27,
+                    runSpacing: 27,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: width / 2.5,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Text(
+                              'Title'
+                          ),
+                          Text(
+                              'Description'
+                          ),
+                          Text(
+                              'Price'
+                          )
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: width / 2.5,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Text(
+                              'Title'
+                          ),
+                          Text(
+                              'Description'
+                          ),
+                          Text(
+                              'Price'
+                          )
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: width / 2.5,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Text(
+                              'Title'
+                          ),
+                          Text(
+                              'Description'
+                          ),
+                          Text(
+                              'Price'
+                          )
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: width / 2.5,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Text(
+                              'Title'
+                          ),
+                          Text(
+                              'Description'
+                          ),
+                          Text(
+                              'Price'
+                          )
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: width / 2.5,
+                            height: 150,
+                            decoration: BoxDecoration(
+                                color: Colors.grey
+                            ),
+                          ),
+                          SizedBox(height: 7),
+                          Text(
+                              'Title'
+                          ),
+                          Text(
+                              'Description'
+                          ),
+                          Text(
+                              'Price'
+                          )
+                        ],
+                      )
+                    ],
                   ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'ЭЛИТ КЛАСС',
-                    imagePath: "https://rasulov.uz/thumb/2/i2gtGXdBwPWd7fmvauvlrQ/r/d/4.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'ЭКСКЛЮЗИВ КЛАСС',
-                    imagePath: "https://rasulov.uz/thumb/2/7uFmRdmes4mge7jcCKMIdw/r/d/3.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'ЭКОШПОН',
-                    imagePath: "https://rasulov.uz/thumb/2/fas2rNy7IXhJ-erW0qQGOg/r/d/2.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'ПРЕМИУМ КЛАСС',
-                    imagePath: "https://rasulov.uz/thumb/2/XGv6CBwc51yrAeK_6AP60w/r/d/5.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'ПРЕСТИЖ КЛАСС',
-                    imagePath: "https://rasulov.uz/thumb/2/tcezXP5RHzfkbYfmSstwUw/r/d/6_4.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'МЕЖКОМНАТНЫЕ ОКНА',
-                    imagePath: "https://rasulov.uz/thumb/2/B4ZaiiZIrAU8LBcplh4c1g/r/d/0909.png",
-                  ),
-                  SizedBox(height: 10),
-                  MyCategoryCard(
-                    cardText: 'МЕБЕЛЬНЫЕ СТВОРКИ',
-                    imagePath: "https://rasulov.uz/thumb/2/znrksxHED1W3ApFKngsQ7A/r/d/8989.png",
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),
