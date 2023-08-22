@@ -22,6 +22,28 @@ class _ShopScreenState extends State<ShopScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text(
+            "BUY OUR PRODUCTS",
+            style: TextStyle(
+            color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          centerTitle: true,
+        ),
         // bottomNavigationBar: BottomBar(),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -32,14 +54,14 @@ class _ShopScreenState extends State<ShopScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // cards
-                  Text(
+                  /*Text(
                     "BUY OUR PRODUCTS",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold
                     ),
-                  ),
+                  ),*/
                   SizedBox(height: 10),
                   MyCategoryCard(
                     cardText: 'НОВАЯ КОЛЛЕКЦИЯ',
