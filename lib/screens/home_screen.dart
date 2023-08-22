@@ -221,7 +221,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       pageRouter: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SettingScreen())
+                            MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact))
                         );
                       }
                   )

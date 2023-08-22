@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MyProfileCard extends StatelessWidget {
-  const MyProfileCard({Key? key}) : super(key: key);
+  final String firstName;
+  final String lastName;
+  const MyProfileCard({Key? key, required this.firstName, required this.lastName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.network(
           "https://www.newvisiontheatres.com/wp-content/uploads/2023/06/Dwayne-Johnson.jpg",
@@ -16,10 +18,11 @@ class MyProfileCard extends StatelessWidget {
         SizedBox(width: 25),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Last name goes here
             Text(
-              "Ergashev",
+              "${lastName}",
               style: TextStyle(
                   fontSize: 18
               ),
@@ -27,26 +30,26 @@ class MyProfileCard extends StatelessWidget {
             SizedBox(height: 5),
             // First name goes here
             Text(
-              "Nurmukhammad",
+              "${firstName}",
               style: TextStyle(
                   fontSize: 18
               ),
             ),
             SizedBox(height: 5),
             // First name goes here
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-              decoration: BoxDecoration(
-                  color: Colors.grey[300]
-              ),
-              child: Text(
-                "DEALER",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+            //   decoration: BoxDecoration(
+            //       color: Colors.grey[300]
+            //   ),
+            //   child: Text(
+            //     "DEALER",
+            //     style: TextStyle(
+            //         fontSize: 18,
+            //         fontWeight: FontWeight.bold
+            //     ),
+            //   ),
+            // ),
           ],
         )
       ],
