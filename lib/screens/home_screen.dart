@@ -5,6 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallet_app/components/home_screen/my_cards.dart';
 import 'package:wallet_app/components/home_screen/my_list_tile.dart';
 import 'package:wallet_app/components/home_screen/my_services.dart';
+import 'package:wallet_app/models/card.dart';
 import 'package:wallet_app/parts/bottom_bar.dart';
 import 'package:wallet_app/screens/cashbacks_screen.dart';
 import 'package:wallet_app/screens/register_screen.dart';
@@ -42,6 +43,8 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   bool _isLoading = true;
   Subscriber? _subscriber;
+  CardDetails? _cardDetails;
+
   @override
   void initState() {
     super.initState();
@@ -67,6 +70,18 @@ class _HomeWidgetState extends State<HomeWidget> {
         admin: responseData['admin'] != null ? responseData['admin'] : 'N/A',
         verified: responseData['verified'] != null ? responseData['verified'] : 'N/A',
         contact: responseData['contact'] != null ? responseData['contact'] : 'N/A'
+    );
+
+    final responseCardDetails = await http.get(
+        Uri.parse('http://10.0.2.2:82/api/subscribers/v1/card-details/${widget.contact}')
+    );
+    final responseCardDetailsData = jsonDecode(responseCardDetails.body);
+
+    _cardDetails = CardDetails(
+        holder: responseCardDetailsData['holder'] != null ? responseCardDetailsData['holder'] : 'N/A',
+        assignedSubscriber: responseCardDetailsData['assignedSubscriber'] != null ? responseCardDetailsData['assignedSubscriber'] : 'N/A',
+        issued: responseCardDetailsData['issued'] != null ? responseCardDetailsData['issued'] : 'N/A',
+        name: responseCardDetailsData['name'] != null ? responseCardDetailsData['name'] : 'N/A'
     );
 
     print(response);
@@ -141,23 +156,23 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     MyCard(
                       balance: 5250.20,
-                      cardNumber: 123456789,
-                      expiryMonth: 10,
-                      expiryYear: 24,
+                      cardNumber: _cardDetails!.holder,
+                      expiryMonth: '10',
+                      expiryYear: '24',
                       color: Colors.deepPurple[400],
                     ),
                     MyCard(
                       balance: 1250.20,
-                      cardNumber: 123456789,
-                      expiryMonth: 10,
-                      expiryYear: 24,
+                      cardNumber: '123456789',
+                      expiryMonth: '10',
+                      expiryYear: '24',
                       color: Colors.green[400],
                     ),
                     MyCard(
                       balance: 250.20,
-                      cardNumber: 123456789,
-                      expiryMonth: 10,
-                      expiryYear: 24,
+                      cardNumber: '123456789',
+                      expiryMonth: '10',
+                      expiryYear: '24',
                       color: Colors.yellow[400],
                     ),
                   ],

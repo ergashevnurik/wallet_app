@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class MyCard extends StatelessWidget {
 
   final double balance;
-  final int cardNumber;
-  final int expiryMonth;
-  final int expiryYear;
+  final String cardNumber;
+  final String expiryMonth;
+  final String expiryYear;
   final color;
 
   const MyCard({Key? key, required this.balance, required this.cardNumber, required this.expiryMonth, required this.expiryYear, this.color}) : super(key: key);
