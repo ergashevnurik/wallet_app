@@ -47,7 +47,7 @@ class BottomBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const CashBackScreen())
+                    MaterialPageRoute(builder: (context) => CashBackScreen(contact: contact))
                   );
                 },
                 icon: Icon(

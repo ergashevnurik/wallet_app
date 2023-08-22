@@ -227,7 +227,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       pageRouter: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CashBackScreen())
+                            MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
                         );
                       }
                   ),
