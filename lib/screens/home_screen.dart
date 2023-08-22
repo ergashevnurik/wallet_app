@@ -57,16 +57,16 @@ class _HomeWidgetState extends State<HomeWidget> {
     final responseData = jsonDecode(response.body);
     _subscriber = Subscriber(
         id: responseData['id'],
-        first: responseData['first'],
-        last: responseData['last'],
-        birthday: responseData['birthday'],
-        gender: responseData['gender'],
-        percentage: responseData['percentage'],
-        uploaded: responseData['uploaded'],
-        username: responseData['username'],
-        admin: responseData['admin'],
-        verified: responseData['verified'],
-        contact: responseData['contact']
+        first: responseData['first'] != null ? responseData['first'] : 'N/A',
+        last: responseData['last'] != null ? responseData['last'] : 'N/A',
+        birthday: responseData['birthday'] != null ? responseData['birthday'] : 'N/A',
+        gender: responseData['gender'] != null ? responseData['gender'] : 'N/A',
+        percentage: responseData['percentage'] != null ? responseData['percentage'] : 'N/A',
+        uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : 'N/A',
+        username: responseData['username'] != null ? responseData['username'] : 'N/A',
+        admin: responseData['admin'] != null ? responseData['admin'] : 'N/A',
+        verified: responseData['verified'] != null ? responseData['verified'] : 'N/A',
+        contact: responseData['contact'] != null ? responseData['contact'] : 'N/A'
     );
 
     print(response);

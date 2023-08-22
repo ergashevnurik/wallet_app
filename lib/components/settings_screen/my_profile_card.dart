@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyProfileCard extends StatelessWidget {
+  final String pic;
   final String firstName;
   final String lastName;
-  const MyProfileCard({Key? key, required this.firstName, required this.lastName}) : super(key: key);
+  const MyProfileCard({Key? key, required this.firstName, required this.lastName, required this.pic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,10 @@ class MyProfileCard extends StatelessWidget {
           "https://www.newvisiontheatres.com/wp-content/uploads/2023/06/Dwayne-Johnson.jpg",
           width: 100,
         ),
+        /*Image.asset(
+          "D://PYTHON_PROJECTS//discount_bot//${pic}",
+          width: 100,
+        ),*/
         SizedBox(width: 25),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
