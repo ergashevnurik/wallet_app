@@ -81,7 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
             },
           ),
           title: Text(
-            "CONFIGURE SETTINGS",
+            "НАСТРОЙТЕ ДАННЫЕ",
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -98,45 +98,105 @@ class _SettingScreenState extends State<SettingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
-                  MyProfileCard(
-                    pic: '${_subscriber!.uploaded}',
-                    firstName: '${_subscriber!.first}',
-                    lastName: '${_subscriber!.last}'
+                  // Personal Details Form
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.all(0),
+                    title: Text('Personal Data'),
+                    expandedAlignment: Alignment.centerLeft,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    subtitle: Text('Change your personal data'),
+                    children: <Widget>[
+                      // Text(
+                      //   'Personal Details',
+                      //   style: TextStyle(
+                      //       color: Colors.black,
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.bold
+                      //   ),
+                      // ),
+                      TextField(
+                        decoration: InputDecoration(
+                            labelText: 'First name'
+                        ),
+                      ),
+                      SizedBox(height: 24),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                          ),
+                          onPressed: () {
+                            // Добавьте здесь логику для проверки введенных данных и входа.
+                          },
+                          child: Text('Save Personal Data'),
+
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 30),
-                  MyConfigCard(
-                    cardText: "Configure your \npersonal data",
-                    icon: Icons.person,
-                   /* onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LanguageConfiguration())
-                      );
-                    },*/
+
+
+                  // Card Details Form
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.all(0),
+                    title: Text('Credit Card Data'),
+                    expandedAlignment: Alignment.centerLeft,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    subtitle: Text('Change your credit card data'),
+                    children: <Widget>[
+                      // Text(
+                      //   'Card Details',
+                      //   style: TextStyle(
+                      //       color: Colors.black,
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.bold
+                      //   ),
+                      // ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Holder',
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Expiry Date',
+                        ),
+                      ),
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'CVV',
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Card Name',
+                        ),
+                      ),
+                      SizedBox(height: 24),
+
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                          ),
+                          onPressed: () {
+                            // Добавьте здесь логику для проверки введенных данных и входа.
+                          },
+                          child: Text('Save Card Data'),
+
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 10),
-                  MyConfigCard(
-                    cardText: "Configure your \nlanguage",
-                    icon: Icons.language,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LanguageConfiguration())
-                      );
-                    },
-                  ),
-                  SizedBox(height: 10),
-                  MyConfigCard(
-                    cardText: "Configure your \ncredit card",
-                    icon: Icons.credit_card,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CreditCardConfiguration())
-                      );
-                    },
-                  )
+
+
                 ],
               ),
             )
