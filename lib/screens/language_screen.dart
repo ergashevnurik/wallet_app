@@ -19,12 +19,26 @@ class _LanguageConfigurationState extends State<LanguageConfiguration> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
+          title: Text(
+            "CONFIGURE PERSONAL SETTINGS",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          centerTitle: true,
         ),
         // bottomNavigationBar: BottomBar(),
       body: SafeArea(
@@ -34,14 +48,6 @@ class _LanguageConfigurationState extends State<LanguageConfiguration> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "CONFIGURE LANGUAGE SETTINGS",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: LanguagePickerDropdown(
