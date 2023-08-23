@@ -14,7 +14,8 @@ import 'language_screen.dart';
 class SettingScreen extends StatefulWidget {
   final String contact;
   final String firstName;
-  const SettingScreen({Key? key, required this.contact, required this.firstName}) : super(key: key);
+  final String lastName;
+  const SettingScreen({Key? key, required this.contact, required this.firstName, required this.lastName}) : super(key: key);
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -22,6 +23,7 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
 
   bool _isLoading = true;
   Subscriber? _subscriber;
@@ -29,15 +31,20 @@ class _SettingScreenState extends State<SettingScreen> {
   void initState() {
     super.initState();
     _firstNameController = TextEditingController(text: widget.firstName);
+    _lastNameController = TextEditingController(text: widget.lastName);
   }
 
   void _updatePersonalDetails() async {
-    final updatedName = _firstNameController.text;
+    final updatedFirstName = _firstNameController.text;
+    final updatedLastName = _lastNameController.text;
 
     final response = await http.post(
       Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-subscriber/${widget.contact}'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'first': updatedName}),
+      body: jsonEncode({
+        'first': updatedFirstName,
+        'last': updatedLastName
+      }),
     );
 
     if (response.statusCode == 200) {
@@ -104,6 +111,12 @@ class _SettingScreenState extends State<SettingScreen> {
                         controller: _firstNameController,
                         decoration: InputDecoration(
                             labelText: 'First name'
+                        ),
+                      ),
+                      TextField(
+                        controller: _lastNameController,
+                        decoration: InputDecoration(
+                            labelText: 'Last name'
                         ),
                       ),
                       SizedBox(height: 24),
