@@ -223,6 +223,20 @@ class _HomeWidgetState extends State<HomeWidget> {
                 // Navigator.pop(context);
               },
             ),
+            ListTile(
+              leading: Icon(Icons.logout), // for Left
+              // trailing: Icon(Icons.settings), // for Right
+              title: const Text('Выйти'),
+              onTap: () {
+                // Update the state of the app
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen())
+                );
+                // Then close the drawer
+                // Navigator.pop(context);
+              },
+            ),
             AboutListTile(
               icon: Icon(Icons.info), // for Left
               child: Text('О приложении'),
