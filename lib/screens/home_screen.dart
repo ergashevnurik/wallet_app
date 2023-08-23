@@ -113,29 +113,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     var width = MediaQuery.of(context).size.width;
-    int _selectedIndex = 0;
-    const TextStyle optionStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-    const List<Widget> _widgetOptions = <Widget>[
-      Text(
-        'Index 0: Home',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 1: Business',
-        style: optionStyle,
-      ),
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
-    ];
 
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -146,46 +124,117 @@ class _HomeWidgetState extends State<HomeWidget> {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.grey,
               ),
-              child: Text('Drawer Header'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Rasulov GI'),
+                  SizedBox(height: 15),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.white
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("${_subscriber!.last}"),
+                            Text("${_subscriber!.first}")
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             ListTile(
-              title: const Text('Home'),
-              selected: _selectedIndex == 0,
+              leading: Icon(Icons.home), // for Left
+              // trailing: Icon(Icons.settings), // for Right
+              title: const Text('Главная страница'),
               onTap: () {
                 // Update the state of the app
-                _onItemTapped(0);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen(contact: _subscriber!.contact))
+                );
                 // Then close the drawer
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('Business'),
-              selected: _selectedIndex == 1,
+              leading: Icon(Icons.shop), // for Left
+              // trailing: Icon(Icons.settings), // for Right
+              title: const Text('Магазин'),
               onTap: () {
                 // Update the state of the app
-                _onItemTapped(1);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ShopScreen())
+                );
                 // Then close the drawer
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text('School'),
-              selected: _selectedIndex == 2,
+              leading: Icon(Icons.settings), // for Left
+              // trailing: Icon(Icons.settings), // for Right
+              title: const Text('Настройки'),
               onTap: () {
                 // Update the state of the app
-                _onItemTapped(2);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact))
+                );
                 // Then close the drawer
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
+            ),
+            ListTile(
+              leading: Icon(Icons.bar_chart_sharp), // for Left
+              // trailing: Icon(Icons.settings), // for Right
+              title: const Text('Мониторинг кэш бек'),
+              onTap: () {
+                // Update the state of the app
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
+                );
+                // Then close the drawer
+                // Navigator.pop(context);
+              },
+            ),
+            AboutListTile(
+              icon: Icon(Icons.info), // for Left
+              child: Text('О приложении'),
+              applicationIcon: Icon(
+                Icons.local_play,
+              ),
+              applicationName: 'My Cool App',
+              applicationVersion: '1.0.25',
+              applicationLegalese: '© 2019 Company',
+              aboutBoxChildren: [
+                ///Content goes here...
+              ],
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
+      // bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -200,13 +249,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                     Row(
                       children: [
                         Text(
-                          '${_subscriber!.first}',
+                          'Rasulov',
                           style: TextStyle(
                               fontSize: 26
                           ),
                         ),
                         Text(
-                          ' ${_subscriber!.last}',
+                          ' GI',
                           style: TextStyle(
                               fontSize: 26
                           ),
@@ -247,7 +296,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       cardNumber: _cardDetails!.holder,
                       expiryMonth: '10',
                       expiryYear: '24',
-                      color: Colors.deepPurple[400],
+                      color: Colors.grey[400],
                       cashBackPercentage: _subscriber!.percentage,
                     ),
                     /*MyCard(
