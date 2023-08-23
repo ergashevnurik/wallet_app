@@ -202,6 +202,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         contact: _subscriber!.contact,
                         firstName: _subscriber!.first,
                         lastName: _subscriber!.last,
+                        holder: _cardDetails!.holder,
+                        expireDate: _cardDetails!.issued,
+                        cardName: _cardDetails!.name,
                     )
                   )
                 );
@@ -397,6 +400,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                               contact: _subscriber!.contact,
                               firstName: _subscriber!.first,
                               lastName: _subscriber!.last,
+                              holder: _cardDetails!.holder,
+                              expireDate: _cardDetails!.issued,
+                              cardName: _cardDetails!.name,
                             )
                           )
                         );
