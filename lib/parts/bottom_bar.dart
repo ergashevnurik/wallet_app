@@ -57,10 +57,10 @@ class BottomBar extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingScreen(contact: contact)),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => SettingScreen(contact: contact)),
+                  // );
                 },
                 icon: Icon(
                   Icons.settings,

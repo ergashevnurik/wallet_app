@@ -198,7 +198,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 // Update the state of the app
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact))
+                    MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact, firstName: _subscriber!.first))
                 );
                 // Then close the drawer
                 // Navigator.pop(context);
@@ -374,7 +374,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       pageRouter: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact))
+                            MaterialPageRoute(builder: (context) => SettingScreen(contact: _subscriber!.contact, firstName: _subscriber!.first))
                         );
                       }
                   )

@@ -13,52 +13,38 @@ import 'language_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   final String contact;
-  const SettingScreen({Key? key, required this.contact}) : super(key: key);
+  final String firstName;
+  const SettingScreen({Key? key, required this.contact, required this.firstName}) : super(key: key);
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  late TextEditingController _firstNameController;
 
   bool _isLoading = true;
   Subscriber? _subscriber;
   @override
   void initState() {
     super.initState();
-    _fetchUserDetails();
+    _firstNameController = TextEditingController(text: widget.firstName);
   }
 
-  Future<void> _fetchUserDetails() async {
-    // Make an HTTP GET request to your Spring Boot API to fetch user details
-    final response = await http.get(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/details/${widget.contact}'),
-    );
+  void _updatePersonalDetails() async {
+    final updatedName = _firstNameController.text;
 
-    final responseData = jsonDecode(response.body);
-    _subscriber = Subscriber(
-        id: responseData['id'],
-        first: responseData['first'] != null ? responseData['first'] : 'N/A',
-        last: responseData['last'] != null ? responseData['last'] : 'N/A',
-        birthday: responseData['birthday'] != null ? responseData['birthday'] : 'N/A',
-        gender: responseData['gender'] != null ? responseData['gender'] : 'N/A',
-        percentage: responseData['percentage'] != null ? responseData['percentage'] : 'N/A',
-        uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : 'N/A',
-        username: responseData['username'] != null ? responseData['username'] : 'N/A',
-        admin: responseData['admin'] != null ? responseData['admin'] : 'N/A',
-        verified: responseData['verified'] != null ? responseData['verified'] : 'N/A',
-        contact: responseData['contact'] != null ? responseData['contact'] : 'N/A'
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-subscriber/${widget.contact}'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'first': updatedName}),
     );
-
-    print(response);
 
     if (response.statusCode == 200) {
-      setState(() {
-
-        _isLoading = false;
-      });
+      print('User details updated successfully');
+      Navigator.pop(context); // Navigate back after successful update
     } else {
-      print('Failed to fetch user details');
+      print('Failed to update user details');
     }
   }
 
@@ -115,6 +101,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       //   ),
                       // ),
                       TextField(
+                        controller: _firstNameController,
                         decoration: InputDecoration(
                             labelText: 'First name'
                         ),
@@ -126,9 +113,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
                           ),
-                          onPressed: () {
-                            // Добавьте здесь логику для проверки введенных данных и входа.
-                          },
+                          onPressed: _updatePersonalDetails,
                           child: Text('Save Personal Data'),
 
                         ),
