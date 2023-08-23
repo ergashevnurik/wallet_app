@@ -152,8 +152,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("${_subscriber!.last}"),
-                            Text("${_subscriber!.first}")
+                            Text("${_subscriber?.last ?? 'N/A'}"),
+                            Text("${_subscriber?.first ?? 'N/A'}")
                           ],
                         )
                       ],

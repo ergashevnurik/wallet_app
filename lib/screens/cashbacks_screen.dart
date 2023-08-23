@@ -28,7 +28,7 @@ class _CashBackScreenState extends State<CashBackScreen> {
   Future<void> _fetchPurchaseDetails() async {
     // Make an HTTP GET request to your Spring Boot API to fetch user details
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/purchase-details/${widget.contact}'),
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/purchase-details/${widget.contact}'),
     );
     if (response.statusCode == 200) {
       final List<dynamic> responseData = jsonDecode(response.body);
