@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
 
-  final double balance;
+  final int balance;
   final String cardNumber;
   final String expiryMonth;
   final String expiryYear;
   final color;
+  final String cashBackPercentage;
 
-  const MyCard({Key? key, required this.balance, required this.cardNumber, required this.expiryMonth, required this.expiryYear, this.color}) : super(key: key);
+  const MyCard({Key? key, required this.balance, required this.cardNumber, required this.expiryMonth, required this.expiryYear, this.color, required this.cashBackPercentage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class MyCard extends StatelessWidget {
             ),
             SizedBox(height: 0),
             Text(
-              '\$${balance.toString()}',
+              '${balance.toString()} UZS',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 40,
@@ -54,17 +55,29 @@ class MyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${cardNumber.toString()}',
+                  'Sizning qaytma foizi:',
                   style: TextStyle(
                       color: Colors.white
                   ),
                 ),
                 Text(
-                  '${expiryMonth.toString()}/${expiryYear.toString()}',
+                  '${cashBackPercentage.toString()}%',
                   style: TextStyle(
                       color: Colors.white
                   ),
-                )
+                ),
+                // Text(
+                //   '${cardNumber.toString()}',
+                //   style: TextStyle(
+                //       color: Colors.white
+                //   ),
+                // ),
+                // Text(
+                //   '${expiryMonth.toString()}/${expiryYear.toString()}',
+                //   style: TextStyle(
+                //       color: Colors.white
+                //   ),
+                // )
               ],
             )
           ],

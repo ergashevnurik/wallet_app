@@ -6,6 +6,7 @@ import 'package:wallet_app/components/home_screen/my_cards.dart';
 import 'package:wallet_app/components/home_screen/my_list_tile.dart';
 import 'package:wallet_app/components/home_screen/my_services.dart';
 import 'package:wallet_app/models/card.dart';
+import 'package:wallet_app/models/purchase.dart';
 import 'package:wallet_app/parts/bottom_bar.dart';
 import 'package:wallet_app/screens/cashbacks_screen.dart';
 import 'package:wallet_app/screens/register_screen.dart';
@@ -44,6 +45,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   bool _isLoading = true;
   Subscriber? _subscriber;
   CardDetails? _cardDetails;
+  int cardDetailsSum = 0;
 
   @override
   void initState() {
@@ -57,7 +59,15 @@ class _HomeWidgetState extends State<HomeWidget> {
       Uri.parse('http://10.0.2.2:82/api/subscribers/v1/details/${widget.contact}'),
     );
 
+    final purchaseResponse = await http.get(
+      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/count/${widget.contact}')
+    );
+
     final responseData = jsonDecode(response.body);
+    final purchaseResponseData = jsonDecode(purchaseResponse.body);
+    cardDetailsSum = purchaseResponseData;
+    print(cardDetailsSum);
+
     _subscriber = Subscriber(
         id: responseData['id'],
         first: responseData['first'] != null ? responseData['first'] : 'N/A',
@@ -156,37 +166,38 @@ class _HomeWidgetState extends State<HomeWidget> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     MyCard(
-                      balance: 5250.20,
+                      balance: cardDetailsSum,
                       cardNumber: _cardDetails!.holder,
                       expiryMonth: '10',
                       expiryYear: '24',
                       color: Colors.deepPurple[400],
+                      cashBackPercentage: _subscriber!.percentage,
                     ),
-                    MyCard(
-                      balance: 1250.20,
+                    /*MyCard(
+                      balance: 1250,
                       cardNumber: '123456789',
                       expiryMonth: '10',
                       expiryYear: '24',
                       color: Colors.green[400],
                     ),
                     MyCard(
-                      balance: 250.20,
+                      balance: 250,
                       cardNumber: '123456789',
                       expiryMonth: '10',
                       expiryYear: '24',
                       color: Colors.yellow[400],
-                    ),
+                    ),*/
                   ],
                 ),
               ),
-              SizedBox(height: 25),
-              SmoothPageIndicator(
-                controller: _controller,
-                count: 3,
-                effect: ExpandingDotsEffect(
-                    activeDotColor: Colors.grey.shade800
-                ),
-              ),
+              // SizedBox(height: 25),
+              // SmoothPageIndicator(
+              //   controller: _controller,
+              //   count: 3,
+              //   effect: ExpandingDotsEffect(
+              //       activeDotColor: Colors.grey.shade800
+              //   ),
+              // ),
 
               // 3 buttons -> send pay bills
               Padding(
