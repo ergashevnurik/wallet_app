@@ -56,11 +56,11 @@ class _HomeWidgetState extends State<HomeWidget> {
   Future<void> _fetchUserDetails() async {
     // Make an HTTP GET request to your Spring Boot API to fetch user details
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/details/${widget.contact}'),
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/details/${widget.contact}'),
     );
 
     final purchaseResponse = await http.get(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/count/${widget.contact}')
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/count/${widget.contact}')
     );
 
     final responseData = jsonDecode(response.body);
@@ -83,7 +83,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
 
     final responseCardDetails = await http.get(
-        Uri.parse('http://10.0.2.2:82/api/subscribers/v1/card-details/${widget.contact}')
+        Uri.parse('https://app.encode.uz/api/subscribers/v1/card-details/${widget.contact}')
     );
     final responseCardDetailsData = jsonDecode(responseCardDetails.body);
 
@@ -199,12 +199,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SettingScreen(
-                        contact: _subscriber!.contact,
-                        firstName: _subscriber!.first,
-                        lastName: _subscriber!.last,
-                        holder: _cardDetails!.holder,
-                        expireDate: _cardDetails!.issued,
-                        cardName: _cardDetails!.name,
+                        contact: _subscriber?.contact ?? 'N/A',
+                        firstName: _subscriber?.first ?? 'N/A',
+                        lastName: _subscriber?.last ?? 'N/A',
+                        holder: _cardDetails?.holder ?? 'N/A',
+                        expireDate: _cardDetails?.issued ?? 'N/A',
+                        cardName: _cardDetails?.name ?? 'N/A',
                     )
                   )
                 );
@@ -315,11 +315,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     MyCard(
                       balance: cardDetailsSum,
-                      cardNumber: _cardDetails!.holder,
+                      cardNumber: _cardDetails?.holder ?? 'N/A',
                       expiryMonth: '10',
                       expiryYear: '24',
                       color: Colors.grey[400],
-                      cashBackPercentage: _subscriber!.percentage,
+                      cashBackPercentage: _subscriber?.percentage ?? 'N/A',
                     ),
                     /*MyCard(
                       balance: 1250,
@@ -397,12 +397,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => SettingScreen(
-                              contact: _subscriber!.contact,
-                              firstName: _subscriber!.first,
-                              lastName: _subscriber!.last,
-                              holder: _cardDetails!.holder,
-                              expireDate: _cardDetails!.issued,
-                              cardName: _cardDetails!.name,
+                              contact: _subscriber?.contact ?? 'N/A',
+                              firstName: _subscriber?.first ?? 'N/A',
+                              lastName: _subscriber?.last ?? 'N/A',
+                              holder: _cardDetails?.holder ?? 'N/A',
+                              expireDate: _cardDetails?.issued ?? 'N/A',
+                              cardName: _cardDetails?.name ?? 'N/A',
                             )
                           )
                         );

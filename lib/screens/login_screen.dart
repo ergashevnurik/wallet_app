@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (phoneNumber.isNotEmpty) {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:82/api/subscribers/v1/login'),
+        Uri.parse('https://app.encode.uz/api/subscribers/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(
             {'contact': phoneNumber}

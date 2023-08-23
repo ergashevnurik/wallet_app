@@ -57,7 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final updatedLastName = _lastNameController.text;
 
     final response = await http.put(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-subscriber/${widget.contact}'),
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/update-subscriber/${widget.contact}'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'first': updatedFirstName,
@@ -80,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final updateCardName = _cardNameController.text;
 
     final creditCardResponse = await http.put(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-card/${widget.contact}'),
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/update-card/${widget.contact}'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'holder': updatedHolder,
