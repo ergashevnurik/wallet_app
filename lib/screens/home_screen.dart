@@ -141,7 +141,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           children: [
              DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Color(0xFFFF9021),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -178,7 +178,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home), // for Left
+              leading: Icon(
+                  Icons.home,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               // trailing: Icon(Icons.settings), // for Right
               title: Text(AppLocalizations.of(context)!.home),
               onTap: () {
@@ -192,7 +195,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.shop), // for Left
+              leading: Icon(
+                  Icons.shop,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               // trailing: Icon(Icons.settings), // for Right
               title: Text(AppLocalizations.of(context)!.shop),
               onTap: () {
@@ -206,7 +212,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings), // for Left
+              leading: Icon(
+                  Icons.settings,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               // trailing: Icon(Icons.settings), // for Right
               title: Text(AppLocalizations.of(context)!.settings),
               onTap: () {
@@ -228,7 +237,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.bar_chart_sharp), // for Left
+              leading: Icon(
+                  Icons.bar_chart_sharp,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               // trailing: Icon(Icons.settings), // for Right
               title: Text(AppLocalizations.of(context)!.monitoring),
               onTap: () {
@@ -242,7 +254,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout), // for Left
+              leading: Icon(
+                  Icons.logout,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               // trailing: Icon(Icons.settings), // for Right
               title: Text(AppLocalizations.of(context)!.logout),
               onTap: () {
@@ -256,7 +271,10 @@ class _HomeWidgetState extends State<HomeWidget> {
               },
             ),
             AboutListTile(
-              icon: Icon(Icons.info), // for Left
+              icon: Icon(
+                  Icons.info,
+                  color: Color(0xFFAA240A),
+              ), // for Left
               child: Text(AppLocalizations.of(context)!.about),
               applicationIcon: Icon(
                 Icons.local_play,
@@ -311,6 +329,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         icon: Icon(
                           Icons.menu,
                           size: 30,
+                          color: Color(0xFFAA240A),
                         ),
                         onPressed: () {
                           _scaffoldKey.currentState!.openDrawer();
@@ -334,7 +353,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       cardNumber: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
                       expiryMonth: '10',
                       expiryYear: '24',
-                      color: Colors.grey[400],
+                      color: Color(0xFFFF9021),
                       cashBackPercentage: _subscriber?.percentage ?? AppLocalizations.of(context)!.na,
                       balanceString: AppLocalizations.of(context)!.balance,
                       currencyString: AppLocalizations.of(context)!.currency,

@@ -169,7 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                              backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updatePersonalDetails,
                           child: Text('Save Personal Data'),
@@ -225,7 +225,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         child: ElevatedButton(
 
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                              backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updateCardDetails,
                           child: Text('Save Card Data'),
@@ -295,7 +295,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                              backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updatePersonalDetails,
                           child: Text('Save Personal Data'),

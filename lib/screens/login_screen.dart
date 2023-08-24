@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Icon(
                             Icons.lock,
                             size: 45,
+                            color: Color(0xFFAA240A),
                         ),
                         SizedBox(height: 15),
                         Text(
@@ -137,7 +138,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: width,
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(Colors.black)
+                              backgroundColor: MaterialStatePropertyAll(
+                                Color(0xFFFF9021)
+                              )
                             ),
                             onPressed: _isLoggedIn ? null : _login, // Disable button if already logged in
                             child: Padding(
