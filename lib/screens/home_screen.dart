@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallet_app/components/home_screen/my_cards.dart';
 import 'package:wallet_app/components/home_screen/my_list_tile.dart';
@@ -282,23 +283,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Rasulov',
-                          style: TextStyle(
-                              fontSize: 26
-                          ),
-                        ),
-                        Text(
-                          ' GI',
-                          style: TextStyle(
-                              fontSize: 26
-                          ),
-                        ),
-                        /*Image.network("https://rasulov.uz/thumb/2/0jPM6tsSJaNTDTWnHZlD7A/280r280/d/logo.svg")*/
-                      ],
-                    ),
+                    SvgPicture.asset('assets/img/logo.svg'),
+                    // Row(
+                    //   children: [
+                    //     Text(
+                    //       'Rasulov',
+                    //       style: TextStyle(
+                    //           fontSize: 26
+                    //       ),
+                    //     ),
+                    //     Text(
+                    //       ' GI',
+                    //       style: TextStyle(
+                    //           fontSize: 26
+                    //       ),
+                    //     ),
+                    //     /*Image.network("https://rasulov.uz/thumb/2/0jPM6tsSJaNTDTWnHZlD7A/280r280/d/logo.svg")*/
+                    //   ],
+                    // ),
                     Container(
                       padding: EdgeInsets.all(5),
                       /*decoration: BoxDecoration(
