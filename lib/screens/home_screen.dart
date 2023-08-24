@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: Locale('uz'),
+      locale: Locale('ru'),
       supportedLocales: [
         Locale('en'),
         Locale('ru'),
@@ -334,6 +334,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                       expiryYear: '24',
                       color: Colors.grey[400],
                       cashBackPercentage: _subscriber?.percentage ?? AppLocalizations.of(context)!.na,
+                      balanceString: AppLocalizations.of(context)!.balance,
+                      currencyString: AppLocalizations.of(context)!.currency,
+                      textString: AppLocalizations.of(context)!.card_string,
                     ),
                     /*MyCard(
                       balance: 1250,

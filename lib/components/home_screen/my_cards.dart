@@ -9,7 +9,13 @@ class MyCard extends StatelessWidget {
   final color;
   final String cashBackPercentage;
 
-  const MyCard({Key? key, required this.balance, required this.cardNumber, required this.expiryMonth, required this.expiryYear, this.color, required this.cashBackPercentage}) : super(key: key);
+  // String to l10n
+  final String balanceString;
+  final String currencyString;
+  final String textString;
+
+
+  const MyCard({Key? key, required this.balance, required this.cardNumber, required this.expiryMonth, required this.expiryYear, this.color, required this.cashBackPercentage, required this.balanceString, required this.currencyString, required this.textString}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +35,7 @@ class MyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Balance',
+                  '${balanceString}',
                   style: TextStyle(
                       color: Colors.white
                   ),
@@ -43,7 +49,7 @@ class MyCard extends StatelessWidget {
             ),
             SizedBox(height: 0),
             Text(
-              '${balance.toString()} UZS',
+              '${balance.toString()} ${currencyString}',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 40,
@@ -55,7 +61,7 @@ class MyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Sizning qaytma foizi:',
+                  '${textString}',
                   style: TextStyle(
                       color: Colors.white
                   ),

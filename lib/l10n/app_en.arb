@@ -34,6 +34,18 @@
   "about": "About",
   "@about": {
         "description": "About App"
+  },
+  "balance": "Balance",
+  "@balance": {
+        "description": "Balance"
+  },
+  "currency": "uzs",
+  "@currency": {
+        "description": "Currency"
+  },
+  "card_string": "Your cash back percentage",
+  "@card_string": {
+        "description": "Your Cash back percentage"
   }
 
 }

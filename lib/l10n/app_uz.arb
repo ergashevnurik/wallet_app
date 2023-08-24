@@ -7,5 +7,8 @@
     "settings": "Sozlamalar",
     "logout": "Chiqish",
     "monitoring": "Cash Backni Kuzatish",
-    "about": "Ilova haqida"
+    "about": "Ilova haqida",
+    "balance": "Balansingiz",
+    "currency": "so'm",
+    "card_string": "Sizning qaytma foizingiz"
 }
