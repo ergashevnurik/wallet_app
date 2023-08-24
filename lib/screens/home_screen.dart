@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallet_app/components/home_screen/my_cards.dart';
 import 'package:wallet_app/components/home_screen/my_list_tile.dart';
@@ -16,6 +17,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/subscriber.dart';
 import 'login_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   final String contact;
@@ -24,6 +26,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: Locale('en'),
+      supportedLocales: [
+        Locale('en'),
+        Locale('ru'),
+        Locale('uz'),
+      ],
       debugShowCheckedModeBanner: false,
       home: HomeWidget(
         contact: contact,
@@ -132,7 +146,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rasulov GI'),
+                  Text(AppLocalizations.of(context)!.rasulovgi),
                   SizedBox(height: 15),
                   Container(
                     child: Row(

@@ -36,6 +36,7 @@ class _SettingScreenState extends State<SettingScreen> {
   late TextEditingController _expireDateController;
   late TextEditingController _cardNameController;
 
+  // Language Data
   bool _isLoading = true;
   Subscriber? _subscriber;
   @override
@@ -98,6 +99,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -225,6 +227,55 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           onPressed: _updateCardDetails,
                           child: Text('Save Card Data'),
+
+                        ),
+                      ),
+                    ],
+                  ),
+                  ExpansionTile(
+                    tilePadding: EdgeInsets.all(0),
+                    title: Text('Language Data'),
+                    expandedAlignment: Alignment.centerLeft,
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    subtitle: Text('Change your language data'),
+                    children: <Widget>[
+                      // Text(
+                      //   'Personal Details',
+                      //   style: TextStyle(
+                      //       color: Colors.black,
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.bold
+                      //   ),
+                      // ),
+                      DropdownMenu(
+                        width: width,
+                        // controller: _languageController,
+                        enableFilter: true,
+                        leadingIcon: const Icon(Icons.search),
+                        label: Text('English'),
+                        inputDecorationTheme: const InputDecorationTheme(
+                          filled: true,
+                          // contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                        ),
+                        dropdownMenuEntries: [
+
+                        ],
+                      ),
+                      // TextField(
+                      //   controller: _firstNameController,
+                      //   decoration: InputDecoration(
+                      //       labelText: 'Choose Language'
+                      //   ),
+                      // ),
+                      SizedBox(height: 24),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(Colors.grey[600])
+                          ),
+                          onPressed: _updatePersonalDetails,
+                          child: Text('Save Personal Data'),
 
                         ),
                       ),
