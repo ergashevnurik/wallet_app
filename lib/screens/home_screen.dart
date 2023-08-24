@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: Locale('en'),
+      locale: Locale('uz'),
       supportedLocales: [
         Locale('en'),
         Locale('ru'),
@@ -84,16 +84,16 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     _subscriber = Subscriber(
         id: responseData['id'],
-        first: responseData['first'] != null ? responseData['first'] : 'N/A',
-        last: responseData['last'] != null ? responseData['last'] : 'N/A',
-        birthday: responseData['birthday'] != null ? responseData['birthday'] : 'N/A',
-        gender: responseData['gender'] != null ? responseData['gender'] : 'N/A',
-        percentage: responseData['percentage'] != null ? responseData['percentage'] : 'N/A',
-        uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : 'N/A',
-        username: responseData['username'] != null ? responseData['username'] : 'N/A',
-        admin: responseData['admin'] != null ? responseData['admin'] : 'N/A',
-        verified: responseData['verified'] != null ? responseData['verified'] : 'N/A',
-        contact: responseData['contact'] != null ? responseData['contact'] : 'N/A'
+        first: responseData['first'] != null ? responseData['first'] : AppLocalizations.of(context)!.na,
+        last: responseData['last'] != null ? responseData['last'] : AppLocalizations.of(context)!.na,
+        birthday: responseData['birthday'] != null ? responseData['birthday'] : AppLocalizations.of(context)!.na,
+        gender: responseData['gender'] != null ? responseData['gender'] : AppLocalizations.of(context)!.na,
+        percentage: responseData['percentage'] != null ? responseData['percentage'] : AppLocalizations.of(context)!.na,
+        uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : AppLocalizations.of(context)!.na,
+        username: responseData['username'] != null ? responseData['username'] : AppLocalizations.of(context)!.na,
+        admin: responseData['admin'] != null ? responseData['admin'] : AppLocalizations.of(context)!.na,
+        verified: responseData['verified'] != null ? responseData['verified'] : AppLocalizations.of(context)!.na,
+        contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na
     );
 
     final responseCardDetails = await http.get(
@@ -102,10 +102,10 @@ class _HomeWidgetState extends State<HomeWidget> {
     final responseCardDetailsData = jsonDecode(responseCardDetails.body);
 
     _cardDetails = CardDetails(
-        holder: responseCardDetailsData['holder'] != null ? responseCardDetailsData['holder'] : 'N/A',
-        assignedSubscriber: responseCardDetailsData['assignedSubscriber'] != null ? responseCardDetailsData['assignedSubscriber'] : 'N/A',
-        issued: responseCardDetailsData['issued'] != null ? responseCardDetailsData['issued'] : 'N/A',
-        name: responseCardDetailsData['name'] != null ? responseCardDetailsData['name'] : 'N/A'
+        holder: responseCardDetailsData['holder'] != null ? responseCardDetailsData['holder'] : AppLocalizations.of(context)!.na,
+        assignedSubscriber: responseCardDetailsData['assignedSubscriber'] != null ? responseCardDetailsData['assignedSubscriber'] : AppLocalizations.of(context)!.na,
+        issued: responseCardDetailsData['issued'] != null ? responseCardDetailsData['issued'] : AppLocalizations.of(context)!.na,
+        name: responseCardDetailsData['name'] != null ? responseCardDetailsData['name'] : AppLocalizations.of(context)!.na
     );
 
     print(response);
@@ -166,8 +166,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("${_subscriber?.last ?? 'N/A'}"),
-                            Text("${_subscriber?.first ?? 'N/A'}")
+                            Text("${_subscriber?.last ?? AppLocalizations.of(context)!.na}"),
+                            Text("${_subscriber?.first ?? AppLocalizations.of(context)!.na}")
                           ],
                         )
                       ],
@@ -179,7 +179,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ListTile(
               leading: Icon(Icons.home), // for Left
               // trailing: Icon(Icons.settings), // for Right
-              title: const Text('Главная страница'),
+              title: Text(AppLocalizations.of(context)!.home),
               onTap: () {
                 // Update the state of the app
                 Navigator.push(
@@ -193,7 +193,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ListTile(
               leading: Icon(Icons.shop), // for Left
               // trailing: Icon(Icons.settings), // for Right
-              title: const Text('Магазин'),
+              title: Text(AppLocalizations.of(context)!.shop),
               onTap: () {
                 // Update the state of the app
                 Navigator.push(
@@ -207,18 +207,18 @@ class _HomeWidgetState extends State<HomeWidget> {
             ListTile(
               leading: Icon(Icons.settings), // for Left
               // trailing: Icon(Icons.settings), // for Right
-              title: const Text('Настройки'),
+              title: Text(AppLocalizations.of(context)!.settings),
               onTap: () {
                 // Update the state of the app
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SettingScreen(
-                        contact: _subscriber?.contact ?? 'N/A',
-                        firstName: _subscriber?.first ?? 'N/A',
-                        lastName: _subscriber?.last ?? 'N/A',
-                        holder: _cardDetails?.holder ?? 'N/A',
-                        expireDate: _cardDetails?.issued ?? 'N/A',
-                        cardName: _cardDetails?.name ?? 'N/A',
+                        contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
+                        firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
+                        lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
+                        holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
+                        expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
+                        cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
                     )
                   )
                 );
@@ -229,7 +229,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ListTile(
               leading: Icon(Icons.bar_chart_sharp), // for Left
               // trailing: Icon(Icons.settings), // for Right
-              title: const Text('Мониторинг кэш бек'),
+              title: Text(AppLocalizations.of(context)!.monitoring),
               onTap: () {
                 // Update the state of the app
                 Navigator.push(
@@ -243,7 +243,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ListTile(
               leading: Icon(Icons.logout), // for Left
               // trailing: Icon(Icons.settings), // for Right
-              title: const Text('Выйти'),
+              title: Text(AppLocalizations.of(context)!.logout),
               onTap: () {
                 // Update the state of the app
                 Navigator.push(
@@ -256,7 +256,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ),
             AboutListTile(
               icon: Icon(Icons.info), // for Left
-              child: Text('О приложении'),
+              child: Text(AppLocalizations.of(context)!.about),
               applicationIcon: Icon(
                 Icons.local_play,
               ),
@@ -329,11 +329,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                   children: [
                     MyCard(
                       balance: cardDetailsSum,
-                      cardNumber: _cardDetails?.holder ?? 'N/A',
+                      cardNumber: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
                       expiryMonth: '10',
                       expiryYear: '24',
                       color: Colors.grey[400],
-                      cashBackPercentage: _subscriber?.percentage ?? 'N/A',
+                      cashBackPercentage: _subscriber?.percentage ?? AppLocalizations.of(context)!.na,
                     ),
                     /*MyCard(
                       balance: 1250,
@@ -381,48 +381,51 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MyServices(
-                      buttonText: "Magazin",
-                      icon: Icons.shopping_bag,
-                      pageRouter: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ShopScreen())
-                        );
-                      }
-                  ),
-                  MyServices(
-                      buttonText: "Cash Backs",
-                      icon: Icons.money,
-                      pageRouter: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
-                        );
-                      }
-                  ),
-                  MyServices(
-                      buttonText: "Sozlamalar",
-                      icon: Icons.settings,
-                      pageRouter: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SettingScreen(
-                              contact: _subscriber?.contact ?? 'N/A',
-                              firstName: _subscriber?.first ?? 'N/A',
-                              lastName: _subscriber?.last ?? 'N/A',
-                              holder: _cardDetails?.holder ?? 'N/A',
-                              expireDate: _cardDetails?.issued ?? 'N/A',
-                              cardName: _cardDetails?.name ?? 'N/A',
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MyServices(
+                        buttonText: AppLocalizations.of(context)!.shop,
+                        icon: Icons.shopping_bag,
+                        pageRouter: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ShopScreen())
+                          );
+                        }
+                    ),
+                    MyServices(
+                        buttonText: AppLocalizations.of(context)!.monitoring,
+                        icon: Icons.money,
+                        pageRouter: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
+                          );
+                        }
+                    ),
+                    MyServices(
+                        buttonText: AppLocalizations.of(context)!.settings,
+                        icon: Icons.settings,
+                        pageRouter: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SettingScreen(
+                                contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
+                                firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
+                                lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
+                                holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
+                                expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
+                                cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
+                              )
                             )
-                          )
-                        );
-                      }
-                  )
-                ],
+                          );
+                        }
+                    )
+                  ],
+                ),
               ),
 
               // column -> stats -> transactions

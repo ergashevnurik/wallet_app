@@ -6,5 +6,34 @@
   "rasulovgi": "Rasulov GI!",
   "@rasulovgi": {
       "description": "The company name"
+  },
+  "na": "N/A",
+  "@na": {
+        "description": "Not found"
+  },
+  "home": "Home",
+  "@home": {
+        "description": "Home Page"
+  },
+  "shop": "Shop",
+  "@shop": {
+        "description": "Shop Page"
+  },
+  "settings": "Settings",
+  "@setting": {
+        "description": "Setting Page"
+  },
+  "monitoring": "Cash Back Monitoring",
+  "@monitoring": {
+        "description": "Cash Back Monitoring Page"
+  },
+  "logout": "Logout",
+  "@logout": {
+        "description": "Logout Page"
+  },
+  "about": "About",
+  "@about": {
+        "description": "About App"
   }
+
 }

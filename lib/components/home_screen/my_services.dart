@@ -21,7 +21,7 @@ class MyServices extends StatelessWidget {
                   BoxShadow(
                       color: Colors.grey.shade400,
                       blurRadius: 60,
-                      spreadRadius: 2
+                      spreadRadius: 0
                   )
                 ]
             ),
