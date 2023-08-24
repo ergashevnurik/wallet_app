@@ -100,6 +100,8 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    const List<String> list = <String>['Uzbek', 'Russian', 'English'];
+    String dropdownValue = list.first;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -247,18 +249,39 @@ class _SettingScreenState extends State<SettingScreen> {
                       //       fontWeight: FontWeight.bold
                       //   ),
                       // ),
-                      DropdownMenu(
+                      DropdownMenu<String>(
                         width: width,
                         // controller: _languageController,
                         enableFilter: true,
-                        leadingIcon: const Icon(Icons.search),
-                        label: Text('English'),
+                        leadingIcon: const Icon(Icons.language),
+                        label: Text('Choose Language'),
                         inputDecorationTheme: const InputDecorationTheme(
-                          filled: true,
+                          // filled: true,
                           // contentPadding: EdgeInsets.symmetric(vertical: 5.0),
                         ),
+                        // initialSelection: list.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue = value!;
+                          });
+                        },
+                        // dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                        //   return DropdownMenuEntry<String>(value: value, label: value);
+                        // }).toList(),
                         dropdownMenuEntries: [
-
+                          DropdownMenuEntry(
+                              value: 'en',
+                              label: 'English'
+                          ),
+                          DropdownMenuEntry(
+                              value: 'ru',
+                              label: 'Russian'
+                          ),
+                          DropdownMenuEntry(
+                              value: 'uz',
+                              label: 'Uzbek'
+                          ),
                         ],
                       ),
                       // TextField(
