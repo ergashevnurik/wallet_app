@@ -392,7 +392,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Personal xizmatlar',
+                      AppLocalizations.of(context)!.personal_data_text,
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w800

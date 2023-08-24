@@ -46,6 +46,10 @@
   "card_string": "Your cash back percentage",
   "@card_string": {
         "description": "Your Cash back percentage"
+  },
+  "personal_data_text": "Personal Services",
+  "@personal_data_text": {
+        "description": "Personal Services Text"
   }
 
 }
