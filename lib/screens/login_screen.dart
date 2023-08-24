@@ -51,7 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 username: responseData['username'] != null ? responseData['username'] : 'N/A',
                 admin: responseData['admin'] != null ? responseData['admin'] : 'N/A',
                 verified: responseData['verified'] != null ? responseData['verified'] : 'N/A',
-                contact: responseData['contact'] != null ? responseData['contact'] : 'N/A'
+                contact: responseData['contact'] != null ? responseData['contact'] : 'N/A',
+                language: responseData['language'] != null ? responseData['language'] : "N/A"
             );
             EasyLoading.showSuccess("Welcome, ${_subscriber!.first}");
             setState(() {

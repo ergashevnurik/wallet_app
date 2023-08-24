@@ -10,8 +10,9 @@ class Subscriber {
   final String username;
   final bool admin;
   final bool verified;
+  final String language;
 
-  Subscriber({required this.first,required  this.last,required  this.birthday,required  this.gender,required  this.percentage,required  this.uploaded,required  this.username,required  this.admin,required  this.verified, required this.contact, required this.id});
+  Subscriber({required this.language, required this.first,required  this.last,required  this.birthday,required  this.gender,required  this.percentage,required  this.uploaded,required  this.username,required  this.admin,required  this.verified, required this.contact, required this.id});
 
   factory Subscriber.fromJson(Map<String, dynamic> json) {
     return Subscriber(
@@ -26,6 +27,7 @@ class Subscriber {
       username: json['username'],
       admin: json['admin'],
       verified: json['verified'],
+      language: json['language'],
     );
   }
 }

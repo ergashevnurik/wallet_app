@@ -20,7 +20,9 @@ class SettingScreen extends StatefulWidget {
   final String holder;
   final String expireDate;
   final String cardName;
-  const SettingScreen({Key? key, required this.contact, required this.firstName, required this.lastName, required this.holder, required this.expireDate, required this.cardName}) : super(key: key);
+  // Language Data Variables
+  final String lang;
+  const SettingScreen({Key? key, required this.contact, required this.firstName, required this.lastName, required this.holder, required this.expireDate, required this.cardName, required this.lang}) : super(key: key);
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -36,6 +38,9 @@ class _SettingScreenState extends State<SettingScreen> {
   late TextEditingController _expireDateController;
   late TextEditingController _cardNameController;
 
+  // Language Data Variables
+  late TextEditingController _langController;
+
   // Language Data
   bool _isLoading = true;
   Subscriber? _subscriber;
@@ -50,6 +55,9 @@ class _SettingScreenState extends State<SettingScreen> {
     _holderController = TextEditingController(text: widget.holder);
     _expireDateController = TextEditingController(text: widget.expireDate);
     _cardNameController = TextEditingController(text: widget.cardName);
+
+    // Language Data Variables
+    _langController = TextEditingController(text: widget.lang);
   }
 
   void _updatePersonalDetails() async {
@@ -96,6 +104,28 @@ class _SettingScreenState extends State<SettingScreen> {
       print('Failed to update card details');
     }
   }
+
+
+  void _updateLanguageDetails() async {
+    // Language Data Variables
+    final updatedLang = _langController.text;
+
+    final response = await http.put(
+      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-lang/${widget.contact}'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'language': updatedLang,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print('Lang details updated successfully');
+      Navigator.pop(context); // Navigate back after successful update
+    } else {
+      print('Failed to update user details');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +281,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       // ),
                       DropdownMenu<String>(
                         width: width,
-                        // controller: _languageController,
+                        controller: _langController,
                         enableFilter: true,
                         leadingIcon: const Icon(Icons.language),
                         label: Text('Choose Language'),
@@ -260,27 +290,27 @@ class _SettingScreenState extends State<SettingScreen> {
                           // contentPadding: EdgeInsets.symmetric(vertical: 5.0),
                         ),
                         // initialSelection: list.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue = value!;
-                          });
-                        },
+                        // onSelected: (String? value) {
+                        //   // This is called when the user selects an item.
+                        //   setState(() {
+                        //     dropdownValue = value!;
+                        //   });
+                        // },
                         // dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
                         //   return DropdownMenuEntry<String>(value: value, label: value);
                         // }).toList(),
                         dropdownMenuEntries: [
                           DropdownMenuEntry(
                               value: 'en',
-                              label: 'English'
+                              label: 'en'
                           ),
                           DropdownMenuEntry(
                               value: 'ru',
-                              label: 'Russian'
+                              label: 'ru'
                           ),
                           DropdownMenuEntry(
                               value: 'uz',
-                              label: 'Uzbek'
+                              label: 'uz'
                           ),
                         ],
                       ),
@@ -297,7 +327,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
-                          onPressed: _updatePersonalDetails,
+                          onPressed: _updateLanguageDetails,
                           child: Text('Save Personal Data'),
 
                         ),

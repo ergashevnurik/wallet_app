@@ -94,7 +94,8 @@ class _HomeWidgetState extends State<HomeWidget> {
         username: responseData['username'] != null ? responseData['username'] : AppLocalizations.of(context)!.na,
         admin: responseData['admin'] != null ? responseData['admin'] : AppLocalizations.of(context)!.na,
         verified: responseData['verified'] != null ? responseData['verified'] : AppLocalizations.of(context)!.na,
-        contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na
+        contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na,
+        language: responseData['language'] != null ? responseData['language'] : AppLocalizations.of(context)!.na
     );
 
     final responseCardDetails = await http.get(
@@ -229,6 +230,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
                         expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
                         cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
+                        lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
                     )
                   )
                 );
@@ -443,6 +445,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
                                 expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
                                 cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
+                                lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
                               )
                             )
                           );
