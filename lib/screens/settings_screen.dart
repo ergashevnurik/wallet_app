@@ -143,7 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: Locale('ru'),
+      // locale: Locale("en"),
       supportedLocales: [
         Locale('en'),
         Locale('ru'),

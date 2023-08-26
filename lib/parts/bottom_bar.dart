@@ -8,7 +8,8 @@ import '../screens/products_screen.dart';
 
 class BottomBar extends StatelessWidget {
   final String contact;
-  const BottomBar({Key? key, required this.contact}) : super(key: key);
+  final String language;
+  const BottomBar({Key? key, required this.contact, required this.language}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

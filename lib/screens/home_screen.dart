@@ -20,9 +20,48 @@ import '../models/subscriber.dart';
 import 'login_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   final String contact;
   const HomeScreen({Key? key, required this.contact}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Subscriber? _subscriber;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserDetails();
+  }
+
+  Future<void> _fetchUserDetails() async {
+    // Make an HTTP GET request to your Spring Boot API to fetch user details
+    final response = await http.get(
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/details/${widget.contact}'),
+    );
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      _subscriber = Subscriber(
+          id: responseData['id'],
+          first: responseData['first'] != null ? responseData['first'] : AppLocalizations.of(context)!.na,
+          last: responseData['last'] != null ? responseData['last'] : AppLocalizations.of(context)!.na,
+          birthday: responseData['birthday'] != null ? responseData['birthday'] : AppLocalizations.of(context)!.na,
+          gender: responseData['gender'] != null ? responseData['gender'] : AppLocalizations.of(context)!.na,
+          percentage: responseData['percentage'] != null ? responseData['percentage'] : AppLocalizations.of(context)!.na,
+          uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : AppLocalizations.of(context)!.na,
+          username: responseData['username'] != null ? responseData['username'] : AppLocalizations.of(context)!.na,
+          admin: responseData['admin'] != null ? responseData['admin'] : AppLocalizations.of(context)!.na,
+          verified: responseData['verified'] != null ? responseData['verified'] : AppLocalizations.of(context)!.na,
+          contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na,
+          language: responseData['language'] != null ? responseData['language'] : "ru"
+      );
+    } else {
+      print('Failed to fetch user details');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +72,7 @@ class HomeScreen extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: Locale('uz'),
+      locale: Locale(_subscriber!.language),
       supportedLocales: [
         Locale('en'),
         Locale('ru'),
@@ -41,7 +80,7 @@ class HomeScreen extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       home: HomeWidget(
-        contact: contact,
+        contact: widget.contact,
       ),
     );
   }
