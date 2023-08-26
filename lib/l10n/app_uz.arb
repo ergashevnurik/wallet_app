@@ -11,5 +11,21 @@
     "balance": "Balansingiz",
     "currency": "so'm",
     "card_string": "Sizning qaytma foizingiz",
-    "personal_data_text": "Personal Xizmatlar"
+    "personal_data_text": "Personal Xizmatlar",
+    "configure_data": "Ma'lumotlarni sozlang",
+    "personal_data": "Shaxsiy malumot",
+    "change_your_personal_data": "Shaxsiy ma'lumotlaringizni o'zgartiring",
+    "first_name": "Ism",
+    "last_name": "Familiya",
+    "save_personal_data": "Shaxsiy ma'lumotlarni saqlang",
+    "credit_card_data": "Kredit karta tafsilotlari",
+    "change_your_credit_card_data": "Kredit kartangiz ma'lumotlarini o'zgartiring",
+    "holder": "Tutuvchi",
+    "expiry_date": "Yaroqlilik muddati",
+    "card_name": "Karta nomi",
+    "save_card_data": "Karta ma'lumotlarini saqlash",
+    "language_data": "Til ma'lumotlari",
+    "change_your_language_data": "Til ma'lumotlaringizni o'zgartiring",
+    "choose_language": "Tilni tanlang",
+    "save_personal_data": "Shaxsiy ma'lumotlarni saqlang"
 }

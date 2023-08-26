@@ -11,5 +11,21 @@
     "balance": "Баланс",
     "currency": "сум",
     "card_string": "Ваш процент от кеш бэка",
-    "personal_data_text": "Персональные Услуги"
+    "personal_data_text": "Персональные Услуги",
+    "configure_data": "Настройте данные",
+    "personal_data": "Персональные данные",
+    "change_your_personal_data": "Измените свои личные данные",
+     "first_name": "Имя",
+     "last_name": "Фамилия",
+     "save_personal_data": "Сохранить личные данные",
+     "credit_card_data": "Данные кредитной карты",
+     "change_your_credit_card_data": "Измените данные своей кредитной карты",
+     "holder": "Держатель",
+     "expiry_date": "Дата истечения срока действия",
+     "card_name": "Имя карты",
+     "save_card_data": "Сохранить данные карты",
+     "language_data": "Языковые данные",
+     "change_your_language_data": "Измените свои языковые данные",
+     "choose_language": "Выберите язык",
+     "save_personal_data": "Сохранить личные данные"
 }

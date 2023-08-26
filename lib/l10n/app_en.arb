@@ -50,6 +50,73 @@
   "personal_data_text": "Personal Services",
   "@personal_data_text": {
         "description": "Personal Services Text"
-  }
+  },
+  "configure_data": "Configure Data",
+  "@configure_data": {
+        "description": "Configure your Data Text"
+  },
+  "personal_data": "Personal Data",
+    "@personal_data": {
+          "description": "Personal Data"
+    },
+  "change_your_personal_data": "Change your personal data",
+       "@change_your_personal_data": {
+             "description": "Change your personal data"
+       },
+  "first_name": "First name",
+         "@first_name": {
+               "description": "First name"
+         },
 
+  "last_name": "Last name",
+           "@last_name": {
+                 "description": "Last name"
+           },
+
+     "save_personal_data": "Save Personal Data",
+             "@save_personal_data": {
+                   "description": "Save Personal Data"
+             },
+
+  "credit_card_data": "Credit Card Data",
+         "@credit_card_data": {
+               "description": "Credit Card Data"
+         },
+
+    "change_your_credit_card_data": "Change your credit card data",
+            "@change_your_credit_card_data": {
+                  "description": "Change your credit card data"
+            },
+    "holder": "Holder",
+               "@holder": {
+                     "description": "Holder"
+               },
+    "expiry_date": "Expiry Date",
+                   "@expiry_date": {
+                         "description": "Expiry Date"
+                   },
+    "card_name": "Card Name",
+                       "@card_name": {
+                             "description": "Card Name"
+                       },
+    "save_card_data": "Save Card Data",
+                           "@save_card_data": {
+                                 "description": "Save Card Data"
+                           },
+    "language_data": "Language Data",
+                               "@language_data": {
+                                     "description": "Language Data"
+                               },
+     "change_your_language_data": "Change your language data",
+                                   "@change_your_language_data": {
+                                         "description": "Change your language data"
+                                   },
+    "choose_language": "Choose Language",
+                                       "@choose_language": {
+                                             "description": "Choose Language"
+                                       },
+    "save_personal_data": "Save Personal Data",
+                                           "@save_personal_data": {
+                                                 "description": "Save Personal Data"
+                                           }
 }

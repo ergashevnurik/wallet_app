@@ -1,15 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wallet_app/parts/bottom_bar.dart';
 
 import '../components/settings_screen/my_config_card.dart';
 import '../components/settings_screen/my_profile_card.dart';
 import '../models/subscriber.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../parts/app_bar.dart';
 import 'carddetails_screen.dart';
 import 'package:http/http.dart' as http;
 import 'language_screen.dart';
+
 
 class SettingScreen extends StatefulWidget {
   // Personal Data Variables
@@ -134,6 +137,18 @@ class _SettingScreenState extends State<SettingScreen> {
     String dropdownValue = list.first;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: Locale('ru'),
+      supportedLocales: [
+        Locale('en'),
+        Locale('ru'),
+        Locale('uz'),
+      ],
       home: Scaffold(
         // bottomNavigationBar: BottomBar(),
         appBar: AppBar(
@@ -149,7 +164,7 @@ class _SettingScreenState extends State<SettingScreen> {
             },
           ),
           title: Text(
-            "НАСТРОЙТЕ ДАННЫЕ",
+            AppLocalizations.of(context)!.configure_data,
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
@@ -169,10 +184,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   // Personal Details Form
                   ExpansionTile(
                     tilePadding: EdgeInsets.all(0),
-                    title: Text('Personal Data'),
+                    title: Text(AppLocalizations.of(context)!.personal_data),
                     expandedAlignment: Alignment.centerLeft,
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                    subtitle: Text('Change your personal data'),
+                    subtitle: Text(AppLocalizations.of(context)!.change_your_personal_data,),
                     children: <Widget>[
                       // Text(
                       //   'Personal Details',
@@ -185,13 +200,13 @@ class _SettingScreenState extends State<SettingScreen> {
                       TextField(
                         controller: _firstNameController,
                         decoration: InputDecoration(
-                            labelText: 'First name'
+                            labelText: AppLocalizations.of(context)!.first_name,
                         ),
                       ),
                       TextField(
                         controller: _lastNameController,
                         decoration: InputDecoration(
-                            labelText: 'Last name'
+                            labelText: AppLocalizations.of(context)!.last_name,
                         ),
                       ),
                       SizedBox(height: 24),
@@ -202,7 +217,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updatePersonalDetails,
-                          child: Text('Save Personal Data'),
+                          child: Text(AppLocalizations.of(context)!.save_personal_data,),
 
                         ),
                       ),
@@ -213,10 +228,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   // Card Details Form
                   ExpansionTile(
                     tilePadding: EdgeInsets.all(0),
-                    title: Text('Credit Card Data'),
+                    title: Text(AppLocalizations.of(context)!.credit_card_data,),
                     expandedAlignment: Alignment.centerLeft,
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                    subtitle: Text('Change your credit card data'),
+                    subtitle: Text(AppLocalizations.of(context)!.change_your_credit_card_data,),
                     children: <Widget>[
                       // Text(
                       //   'Card Details',
@@ -229,7 +244,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       TextField(
                         controller: _holderController,
                         decoration: InputDecoration(
-                          labelText: 'Holder',
+                          labelText: AppLocalizations.of(context)!.holder,
                         ),
                       ),
                       SizedBox(height: 16),
@@ -237,7 +252,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         controller: _expireDateController,
                         // obscureText: true,
                         decoration: InputDecoration(
-                          labelText: 'Expiry Date',
+                          labelText: AppLocalizations.of(context)!.expiry_date,
                         ),
                       ),
                       SizedBox(height: 16),
@@ -245,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         controller: _cardNameController,
                         // obscureText: true,
                         decoration: InputDecoration(
-                          labelText: 'Card Name',
+                          labelText: AppLocalizations.of(context)!.card_name,
                         ),
                       ),
                       SizedBox(height: 24),
@@ -258,7 +273,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updateCardDetails,
-                          child: Text('Save Card Data'),
+                          child: Text(AppLocalizations.of(context)!.save_card_data,),
 
                         ),
                       ),
@@ -266,10 +281,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   ExpansionTile(
                     tilePadding: EdgeInsets.all(0),
-                    title: Text('Language Data'),
+                    title: Text(AppLocalizations.of(context)!.language_data,),
                     expandedAlignment: Alignment.centerLeft,
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                    subtitle: Text('Change your language data'),
+                    subtitle: Text(AppLocalizations.of(context)!.change_your_language_data,),
                     children: <Widget>[
                       // Text(
                       //   'Personal Details',
@@ -284,7 +299,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         controller: _langController,
                         enableFilter: true,
                         leadingIcon: const Icon(Icons.language),
-                        label: Text('Choose Language'),
+                        label: Text(AppLocalizations.of(context)!.choose_language,),
                         inputDecorationTheme: const InputDecorationTheme(
                           // filled: true,
                           // contentPadding: EdgeInsets.symmetric(vertical: 5.0),
@@ -328,7 +343,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               backgroundColor: MaterialStatePropertyAll(Color(0xFFFF9021))
                           ),
                           onPressed: _updateLanguageDetails,
-                          child: Text('Save Personal Data'),
+                          child: Text(AppLocalizations.of(context)!.save_personal_data,),
 
                         ),
                       ),

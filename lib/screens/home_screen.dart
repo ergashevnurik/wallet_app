@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: Locale('ru'),
+      locale: Locale('uz'),
       supportedLocales: [
         Locale('en'),
         Locale('ru'),
