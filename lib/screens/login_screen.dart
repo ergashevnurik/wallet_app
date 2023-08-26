@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               _isLoggedIn = true; // Update login status
             });
             // Navigate to another screen
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => HomeScreen(contact: _subscriber!.contact)),
             );

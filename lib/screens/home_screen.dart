@@ -75,46 +75,49 @@ class _HomeWidgetState extends State<HomeWidget> {
     );
 
     final purchaseResponse = await http.get(
-      Uri.parse('https://app.encode.uz/api/subscribers/v1/count/${widget.contact}')
-    );
-
-    final responseData = jsonDecode(response.body);
-    final purchaseResponseData = jsonDecode(purchaseResponse.body);
-    cardDetailsSum = purchaseResponseData;
-    print(cardDetailsSum);
-
-    _subscriber = Subscriber(
-        id: responseData['id'],
-        first: responseData['first'] != null ? responseData['first'] : AppLocalizations.of(context)!.na,
-        last: responseData['last'] != null ? responseData['last'] : AppLocalizations.of(context)!.na,
-        birthday: responseData['birthday'] != null ? responseData['birthday'] : AppLocalizations.of(context)!.na,
-        gender: responseData['gender'] != null ? responseData['gender'] : AppLocalizations.of(context)!.na,
-        percentage: responseData['percentage'] != null ? responseData['percentage'] : AppLocalizations.of(context)!.na,
-        uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : AppLocalizations.of(context)!.na,
-        username: responseData['username'] != null ? responseData['username'] : AppLocalizations.of(context)!.na,
-        admin: responseData['admin'] != null ? responseData['admin'] : AppLocalizations.of(context)!.na,
-        verified: responseData['verified'] != null ? responseData['verified'] : AppLocalizations.of(context)!.na,
-        contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na,
-        language: responseData['language'] != null ? responseData['language'] : AppLocalizations.of(context)!.na
+        Uri.parse('https://app.encode.uz/api/subscribers/v1/count/${widget.contact}')
     );
 
     final responseCardDetails = await http.get(
         Uri.parse('https://app.encode.uz/api/subscribers/v1/card-details/${widget.contact}')
     );
-    final responseCardDetailsData = jsonDecode(responseCardDetails.body);
-
-    _cardDetails = CardDetails(
-        holder: responseCardDetailsData['holder'] != null ? responseCardDetailsData['holder'] : AppLocalizations.of(context)!.na,
-        assignedSubscriber: responseCardDetailsData['assignedSubscriber'] != null ? responseCardDetailsData['assignedSubscriber'] : AppLocalizations.of(context)!.na,
-        issued: responseCardDetailsData['issued'] != null ? responseCardDetailsData['issued'] : AppLocalizations.of(context)!.na,
-        name: responseCardDetailsData['name'] != null ? responseCardDetailsData['name'] : AppLocalizations.of(context)!.na
-    );
-
-    print(response);
 
     if (response.statusCode == 200) {
-      setState(() {
 
+
+      final responseData = jsonDecode(response.body);
+      final purchaseResponseData = jsonDecode(purchaseResponse.body);
+      cardDetailsSum = purchaseResponseData;
+      print(cardDetailsSum);
+
+      _subscriber = Subscriber(
+          id: responseData['id'],
+          first: responseData['first'] != null ? responseData['first'] : AppLocalizations.of(context)!.na,
+          last: responseData['last'] != null ? responseData['last'] : AppLocalizations.of(context)!.na,
+          birthday: responseData['birthday'] != null ? responseData['birthday'] : AppLocalizations.of(context)!.na,
+          gender: responseData['gender'] != null ? responseData['gender'] : AppLocalizations.of(context)!.na,
+          percentage: responseData['percentage'] != null ? responseData['percentage'] : AppLocalizations.of(context)!.na,
+          uploaded: responseData['uploaded'] != null ? responseData['uploaded'] : AppLocalizations.of(context)!.na,
+          username: responseData['username'] != null ? responseData['username'] : AppLocalizations.of(context)!.na,
+          admin: responseData['admin'] != null ? responseData['admin'] : AppLocalizations.of(context)!.na,
+          verified: responseData['verified'] != null ? responseData['verified'] : AppLocalizations.of(context)!.na,
+          contact: responseData['contact'] != null ? responseData['contact'] : AppLocalizations.of(context)!.na,
+          language: responseData['language'] != null ? responseData['language'] : AppLocalizations.of(context)!.na
+      );
+
+
+      if (responseCardDetails.body.isNotEmpty) {
+        final responseCardDetailsData = jsonDecode(responseCardDetails.body);
+        _cardDetails = CardDetails(
+            holder: responseCardDetailsData['holder'] != null ? responseCardDetailsData['holder'] : AppLocalizations.of(context)!.na,
+            assignedSubscriber: responseCardDetailsData['assignedSubscriber'] != null ? responseCardDetailsData['assignedSubscriber'] : AppLocalizations.of(context)!.na,
+            issued: responseCardDetailsData['issued'] != null ? responseCardDetailsData['issued'] : AppLocalizations.of(context)!.na,
+            name: responseCardDetailsData['name'] != null ? responseCardDetailsData['name'] : AppLocalizations.of(context)!.na
+        );
+
+      }
+
+      setState(() {
         _isLoading = false;
       });
     } else {
@@ -130,355 +133,358 @@ class _HomeWidgetState extends State<HomeWidget> {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     var width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xFFFF9021),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(AppLocalizations.of(context)!.rasulovgi),
-                  SizedBox(height: 15),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.white
+    return RefreshIndicator(
+      onRefresh: _fetchUserDetails,
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+               DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xFFFF9021),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppLocalizations.of(context)!.rasulovgi),
+                    SizedBox(height: 15),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.white
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("${_subscriber?.last ?? AppLocalizations.of(context)!.na}"),
-                            Text("${_subscriber?.first ?? AppLocalizations.of(context)!.na}")
-                          ],
-                        )
-                      ],
-                    ),
-                  )
+                          SizedBox(width: 8),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("${_subscriber?.last ?? AppLocalizations.of(context)!.na}"),
+                              Text("${_subscriber?.first ?? AppLocalizations.of(context)!.na}")
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                    Icons.home,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                // trailing: Icon(Icons.settings), // for Right
+                title: Text(AppLocalizations.of(context)!.home),
+                onTap: () {
+                  // Update the state of the app
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen(contact: _subscriber!.contact))
+                  );
+                  // Then close the drawer
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                    Icons.shop,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                // trailing: Icon(Icons.settings), // for Right
+                title: Text(AppLocalizations.of(context)!.shop),
+                onTap: () {
+                  // Update the state of the app
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ShopScreen())
+                  );
+                  // Then close the drawer
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                    Icons.settings,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                // trailing: Icon(Icons.settings), // for Right
+                title: Text(AppLocalizations.of(context)!.settings),
+                onTap: () {
+                  // Update the state of the app
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingScreen(
+                          contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
+                          firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
+                          lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
+                          holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
+                          expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
+                          cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
+                          lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
+                      )
+                    )
+                  );
+                  // Then close the drawer
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                    Icons.bar_chart_sharp,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                // trailing: Icon(Icons.settings), // for Right
+                title: Text(AppLocalizations.of(context)!.monitoring),
+                onTap: () {
+                  // Update the state of the app
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
+                  );
+                  // Then close the drawer
+                  // Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                    Icons.logout,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                // trailing: Icon(Icons.settings), // for Right
+                title: Text(AppLocalizations.of(context)!.logout),
+                onTap: () {
+                  // Update the state of the app
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen())
+                  );
+                  // Then close the drawer
+                  // Navigator.pop(context);
+                },
+              ),
+              AboutListTile(
+                icon: Icon(
+                    Icons.info,
+                    color: Color(0xFFAA240A),
+                ), // for Left
+                child: Text(AppLocalizations.of(context)!.about),
+                applicationIcon: Icon(
+                  Icons.local_play,
+                ),
+                applicationName: 'My Cool App',
+                applicationVersion: '1.0.25',
+                applicationLegalese: '© 2019 Company',
+                aboutBoxChildren: [
+                  ///Content goes here...
                 ],
               ),
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.home,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              // trailing: Icon(Icons.settings), // for Right
-              title: Text(AppLocalizations.of(context)!.home),
-              onTap: () {
-                // Update the state of the app
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen(contact: _subscriber!.contact))
-                );
-                // Then close the drawer
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.shop,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              // trailing: Icon(Icons.settings), // for Right
-              title: Text(AppLocalizations.of(context)!.shop),
-              onTap: () {
-                // Update the state of the app
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ShopScreen())
-                );
-                // Then close the drawer
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.settings,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              // trailing: Icon(Icons.settings), // for Right
-              title: Text(AppLocalizations.of(context)!.settings),
-              onTap: () {
-                // Update the state of the app
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingScreen(
-                        contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
-                        firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
-                        lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
-                        holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
-                        expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
-                        cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
-                        lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
-                    )
-                  )
-                );
-                // Then close the drawer
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.bar_chart_sharp,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              // trailing: Icon(Icons.settings), // for Right
-              title: Text(AppLocalizations.of(context)!.monitoring),
-              onTap: () {
-                // Update the state of the app
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
-                );
-                // Then close the drawer
-                // Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.logout,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              // trailing: Icon(Icons.settings), // for Right
-              title: Text(AppLocalizations.of(context)!.logout),
-              onTap: () {
-                // Update the state of the app
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginScreen())
-                );
-                // Then close the drawer
-                // Navigator.pop(context);
-              },
-            ),
-            AboutListTile(
-              icon: Icon(
-                  Icons.info,
-                  color: Color(0xFFAA240A),
-              ), // for Left
-              child: Text(AppLocalizations.of(context)!.about),
-              applicationIcon: Icon(
-                Icons.local_play,
-              ),
-              applicationName: 'My Cool App',
-              applicationVersion: '1.0.25',
-              applicationLegalese: '© 2019 Company',
-              aboutBoxChildren: [
-                ///Content goes here...
+            ],
+          ),
+        ),
+        // bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                //app bar
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SvgPicture.asset('assets/img/logo.svg'),
+                      // Row(
+                      //   children: [
+                      //     Text(
+                      //       'Rasulov',
+                      //       style: TextStyle(
+                      //           fontSize: 26
+                      //       ),
+                      //     ),
+                      //     Text(
+                      //       ' GI',
+                      //       style: TextStyle(
+                      //           fontSize: 26
+                      //       ),
+                      //     ),
+                      //     /*Image.network("https://rasulov.uz/thumb/2/0jPM6tsSJaNTDTWnHZlD7A/280r280/d/logo.svg")*/
+                      //   ],
+                      // ),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        /*decoration: BoxDecoration(
+                            color: Colors.deepOrange[300],
+                            shape: BoxShape.circle
+                          ),*/
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.menu,
+                            size: 30,
+                            color: Color(0xFFAA240A),
+                          ),
+                          onPressed: () {
+                            _scaffoldKey.currentState!.openDrawer();
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25),
+
+                // cards
+                Container(
+                  height: 200,
+                  child: PageView(
+                    controller: _controller,
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      MyCard(
+                        balance: cardDetailsSum,
+                        cardNumber: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
+                        expiryMonth: '10',
+                        expiryYear: '24',
+                        color: Color(0xFFFF9021),
+                        cashBackPercentage: _subscriber?.percentage ?? AppLocalizations.of(context)!.na,
+                        balanceString: AppLocalizations.of(context)!.balance,
+                        currencyString: AppLocalizations.of(context)!.currency,
+                        textString: AppLocalizations.of(context)!.card_string,
+                      ),
+                      /*MyCard(
+                        balance: 1250,
+                        cardNumber: '123456789',
+                        expiryMonth: '10',
+                        expiryYear: '24',
+                        color: Colors.green[400],
+                      ),
+                      MyCard(
+                        balance: 250,
+                        cardNumber: '123456789',
+                        expiryMonth: '10',
+                        expiryYear: '24',
+                        color: Colors.yellow[400],
+                      ),*/
+                    ],
+                  ),
+                ),
+                // SizedBox(height: 25),
+                // SmoothPageIndicator(
+                //   controller: _controller,
+                //   count: 3,
+                //   effect: ExpandingDotsEffect(
+                //       activeDotColor: Colors.grey.shade800
+                //   ),
+                // ),
+
+                // 3 buttons -> send pay bills
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.personal_data_text,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.arrow_forward_ios)
+                      )
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MyServices(
+                          buttonText: AppLocalizations.of(context)!.shop,
+                          icon: Icons.shopping_bag,
+                          pageRouter: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ShopScreen())
+                            );
+                          }
+                      ),
+                      MyServices(
+                          buttonText: AppLocalizations.of(context)!.monitoring,
+                          icon: Icons.money,
+                          pageRouter: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
+                            );
+                          }
+                      ),
+                      MyServices(
+                          buttonText: AppLocalizations.of(context)!.settings,
+                          icon: Icons.settings,
+                          pageRouter: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SettingScreen(
+                                  contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
+                                  firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
+                                  lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
+                                  holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
+                                  expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
+                                  cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
+                                  lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
+                                )
+                              )
+                            );
+                          }
+                      )
+                    ],
+                  ),
+                ),
+
+                // column -> stats -> transactions
+                SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.all(27.0),
+                  child: Column(
+                    children: [
+                      MyListTile(
+                          icon: Icons.analytics,
+                          tileName: 'Analytics',
+                          description: 'Payment and Income'
+                      ),
+                      MyListTile(
+                          icon: Icons.verified_user,
+                          tileName: 'Users',
+                          description: 'Users and subscribers'
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Online shop
+
+
               ],
             ),
-          ],
-        ),
-      ),
-      // bottomNavigationBar: BottomBar(contact: _subscriber!.contact),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              //app bar
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SvgPicture.asset('assets/img/logo.svg'),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       'Rasulov',
-                    //       style: TextStyle(
-                    //           fontSize: 26
-                    //       ),
-                    //     ),
-                    //     Text(
-                    //       ' GI',
-                    //       style: TextStyle(
-                    //           fontSize: 26
-                    //       ),
-                    //     ),
-                    //     /*Image.network("https://rasulov.uz/thumb/2/0jPM6tsSJaNTDTWnHZlD7A/280r280/d/logo.svg")*/
-                    //   ],
-                    // ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      /*decoration: BoxDecoration(
-                          color: Colors.deepOrange[300],
-                          shape: BoxShape.circle
-                        ),*/
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.menu,
-                          size: 30,
-                          color: Color(0xFFAA240A),
-                        ),
-                        onPressed: () {
-                          _scaffoldKey.currentState!.openDrawer();
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 25),
-
-              // cards
-              Container(
-                height: 200,
-                child: PageView(
-                  controller: _controller,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    MyCard(
-                      balance: cardDetailsSum,
-                      cardNumber: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
-                      expiryMonth: '10',
-                      expiryYear: '24',
-                      color: Color(0xFFFF9021),
-                      cashBackPercentage: _subscriber?.percentage ?? AppLocalizations.of(context)!.na,
-                      balanceString: AppLocalizations.of(context)!.balance,
-                      currencyString: AppLocalizations.of(context)!.currency,
-                      textString: AppLocalizations.of(context)!.card_string,
-                    ),
-                    /*MyCard(
-                      balance: 1250,
-                      cardNumber: '123456789',
-                      expiryMonth: '10',
-                      expiryYear: '24',
-                      color: Colors.green[400],
-                    ),
-                    MyCard(
-                      balance: 250,
-                      cardNumber: '123456789',
-                      expiryMonth: '10',
-                      expiryYear: '24',
-                      color: Colors.yellow[400],
-                    ),*/
-                  ],
-                ),
-              ),
-              // SizedBox(height: 25),
-              // SmoothPageIndicator(
-              //   controller: _controller,
-              //   count: 3,
-              //   effect: ExpandingDotsEffect(
-              //       activeDotColor: Colors.grey.shade800
-              //   ),
-              // ),
-
-              // 3 buttons -> send pay bills
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.personal_data_text,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800
-                      ),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_forward_ios)
-                    )
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyServices(
-                        buttonText: AppLocalizations.of(context)!.shop,
-                        icon: Icons.shopping_bag,
-                        pageRouter: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ShopScreen())
-                          );
-                        }
-                    ),
-                    MyServices(
-                        buttonText: AppLocalizations.of(context)!.monitoring,
-                        icon: Icons.money,
-                        pageRouter: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => CashBackScreen(contact: _subscriber!.contact))
-                          );
-                        }
-                    ),
-                    MyServices(
-                        buttonText: AppLocalizations.of(context)!.settings,
-                        icon: Icons.settings,
-                        pageRouter: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SettingScreen(
-                                contact: _subscriber?.contact ?? AppLocalizations.of(context)!.na,
-                                firstName: _subscriber?.first ?? AppLocalizations.of(context)!.na,
-                                lastName: _subscriber?.last ?? AppLocalizations.of(context)!.na,
-                                holder: _cardDetails?.holder ?? AppLocalizations.of(context)!.na,
-                                expireDate: _cardDetails?.issued ?? AppLocalizations.of(context)!.na,
-                                cardName: _cardDetails?.name ?? AppLocalizations.of(context)!.na,
-                                lang: _subscriber?.language ?? AppLocalizations.of(context)!.na,
-                              )
-                            )
-                          );
-                        }
-                    )
-                  ],
-                ),
-              ),
-
-              // column -> stats -> transactions
-              SizedBox(height: 25),
-              Padding(
-                padding: const EdgeInsets.all(27.0),
-                child: Column(
-                  children: [
-                    MyListTile(
-                        icon: Icons.analytics,
-                        tileName: 'Analytics',
-                        description: 'Payment and Income'
-                    ),
-                    MyListTile(
-                        icon: Icons.verified_user,
-                        tileName: 'Users',
-                        description: 'Users and subscribers'
-                    ),
-                  ],
-                ),
-              ),
-
-              // Online shop
-
-
-            ],
           ),
         ),
       ),
