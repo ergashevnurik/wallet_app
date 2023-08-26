@@ -29,6 +29,7 @@ class MyServices extends StatelessWidget {
               onPressed: pageRouter,
               icon: Icon(
                 icon,
+                color: Color(0xFFFF9021),
               ),
             ),
           ),

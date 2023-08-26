@@ -19,11 +19,12 @@ class MyListTile extends StatelessWidget {
                 height: 80,
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(12)
                 ),
                 child: Icon(
                   icon,
+                  color: Color(0xFFFF9021),
                   size: 50,
                 ),
               ),

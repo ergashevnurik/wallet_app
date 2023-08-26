@@ -114,7 +114,7 @@ class _SettingScreenState extends State<SettingScreen> {
     final updatedLang = _langController.text;
 
     final response = await http.put(
-      Uri.parse('http://10.0.2.2:82/api/subscribers/v1/update-lang/${widget.contact}'),
+      Uri.parse('https://app.encode.uz/api/subscribers/v1/update-lang/${widget.contact}'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'language': updatedLang,
